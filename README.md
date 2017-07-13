@@ -5,7 +5,7 @@ $ sudo emerge -aq x11-wm/xmonad-contrib
 $ sudo emerge -aq x11-misc/xmobar
 ```
 
-# Instalando programas adcionais.
+# Instalando programas adicionais.
 ```
 $ sudo emerge -aq x11-misc/stalonetray
 $ sudo emerge -aq app-misc/ranger
@@ -24,4 +24,25 @@ $ sudo emerge -aq highlight
 $ sudo emerge -aq unrar
 $ sudo emerge -aq odt2txt
 ```
-# Arquivos para configuração do xmonad.
+# Copiando/Colando arquivos para a configuração do xmonad.
+
+- Cole o arquivo de configuração do Xmobar `.xmobarrc` na pasta principal do usuário.
+
+###### ~/.xmobarrc
+
+- Cole o arquivo de configuração do Stalonetray `.stalonetrayrc` na pasta principal do usuário.
+
+###### ~/.stalonetrayrc
+
+- Cole o arquivo de configuração e execução do `volume.sh` volume dentro da pasta `.xmonad`.
+
+###### ~/.xmonad/volume.sh
+
+- Cole o arquivo principal de configuração do xmonad `xmonad.hs` dentro da pasta `.xmonad`.
+
+###### ~/.xmonad/xmonad.hs
+
+# Recopile o xmonad
+Recopile o xmonad com o comando:
+
+`xmonad --recopile`
