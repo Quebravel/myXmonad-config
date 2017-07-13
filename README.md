@@ -43,7 +43,7 @@ $ sudo emerge -aq odt2txt
 > `~/.xmonad/xmonad.hs`
 
 # Recompile o xmonad
-Recopile o xmonad com o comando:
+Recompile o xmonad com o comando:
 
 > `xmonad --recompile`
 
@@ -55,7 +55,7 @@ Recopile o xmonad com o comando:
 
 - Remova a linha:
 
-`, handleEventHook    = fullscreenEventHook`
+ `, handleEventHook    = fullscreenEventHook`
 
 - Adicione a linha:
 ```
