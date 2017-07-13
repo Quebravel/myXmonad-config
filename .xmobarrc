@@ -5,8 +5,10 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
         , fgColor = "grey"
         , position = TopW L 97
 	, commands = [ 
-		       	  Run Network "wlp2s0" ["-L","0","-H","32","--normal","green","--high","red"] 10
-       			, Run Com            "sh" ["/home/jonatas/.xmonad/volume.sh"] "volume" 10         	
+       			-- mostar intenciade de volume
+			  Run Com            "sh" ["/home/jonatas/.xmonad/volume.sh"] "volume" 10         	
+			
+			-- monitor de batéria
 			, Run Battery        [ "--template" , "Bat: <acstatus>"
                              , "--Low"      , "10"        -- units: %
                              , "--High"     , "80"        -- units: %
@@ -22,7 +24,8 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                                        -- charged status
                                        , "-i"	, "<fc=#006000>Cheio</fc>"
                              ] 50 
-                        -- cpu core temperature monitor
+                        
+			-- cpu core temperatura monitor
 		        , Run CoreTemp       [ "--template" , "Temp: <core0>°C <core1>°C"
                              , "--Low"      , "60"        -- units: °C
                              , "--High"     , "80"        -- units: °C
@@ -30,27 +33,41 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                              , "--normal"   , "darkorange"
                              , "--high"     , "red"
                              ] 50
---			, Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
-                         -- network activity monitor (dynamic interface resolution)
+                         
+			-- network atividade monitor (dynamic interface resolution)
         		, Run DynNetwork     [ "--template" , "<dev>: <rx>kB/s <tx>kB/s"
                              , "--Low"      , "30000"       -- units: B/s
                              , "--High"     , "60000"       -- units: B/s
-                             , "--low"      , "green"
+                             , "--low"      , "blueviolet"
                              , "--normal"   , "orange"
                              , "--high"     , "red"
                              ] 10
-			, Run Memory ["-t","Mem: <usedratio>%"] 10
-                        -- cpu activity monitor
+			
+			-- memory usage monitor
+        		, Run Memory         [ "--template" ,"Mem: <usedratio>%"
+                             , "--Low"      , "20"        -- units: %
+                             , "--High"     , "90"        -- units: %
+                             , "--low"      , "gray"
+                             , "--normal"   , "darkorange"
+                             , "--high"     , "darkred"
+                             ] 10
+
+			-- cpu actividade monitor
         		, Run MultiCpu       [ "--template" , "Cpu: <total0>% <total1>% <total2>% <total3>%"
                              , "--Low"      , "50"         -- units: %
                              , "--High"     , "85"         -- units: %
-                             , "--low"      , "green"
+                             , "--low"      , "yellow"
                              , "--normal"   , "orange"
                              , "--high"     , "red"
                              ] 10
+			
+			-- mostrar data
 			, Run Date "%A %d %B %Y %H:%M:%S " "date" 10
-                        , Run StdinReader
-                        ]
+                        
+			-- mostrar barra de titulo e tags
+			, Run StdinReader
+                        
+			]
         , sepChar = "%"
         , alignSep = "}{"
         , template = " %StdinReader% | %multicpu% | %memory% | %battery% }{ %dynnetwork% | %coretemp% | %volume% | <fc=#ee9a00>%date%</fc> " --
