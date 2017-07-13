@@ -9,6 +9,9 @@ import XMonad.Hooks.EwmhDesktops
 import System.IO
 
 myTerminal = "xfce4-terminal"
+myLayout = tiled ||| Mirror tiled ||| Full                      -- Faz a janela
+  where                                                         -- em tela cheia ficar
+    tiled   = Tall 1 (3/100) (3/5)                              -- sem borda
 
 main = do
     xmproc <- spawnPipe "xmobar"
@@ -18,10 +21,10 @@ main = do
 	, borderWidth        = 1
 	, focusedBorderColor = "darkgray"
 	, normalBorderColor  = "black"
-	, terminal 	= myTerminal
+	, terminal = myTerminal
 	, startupHook = setWMName "LG3D"
-	, layoutHook = avoidStruts $ layoutHook defaultConfig
-        , logHook = dynamicLogWithPP xmobarPP
+	, layoutHook = avoidStruts $ smartBorders $ myLayout
+	, logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppTitle = xmobarColor "green" "" . shorten 50
                         }
