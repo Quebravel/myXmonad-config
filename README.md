@@ -1,8 +1,10 @@
 # Instalando xmonad no gentoo.
 
-```$ sudo emerge -aq x11-wm/xmonad
+```
+$ sudo emerge -aq x11-wm/xmonad
 $ sudo emerge -aq x11-wm/xmonad-contrib
-$ sudo emerge -aq x11-misc/xmobar```
+$ sudo emerge -aq x11-misc/xmobar
+```
 
 # Instalando programas adcionais.
 
