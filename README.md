@@ -28,19 +28,19 @@ $ sudo emerge -aq odt2txt
 
 - Cole o arquivo de configuração do Xmobar `.xmobarrc` na pasta principal do usuário.
 
-> ~/.xmobarrc
+> `~/.xmobarrc`
 
 - Cole o arquivo de configuração do Stalonetray `.stalonetrayrc` na pasta principal do usuário.
 
-> ~/.stalonetrayrc
+> `~/.stalonetrayrc`
 
 - Cole o arquivo de configuração e execução do `volume.sh` volume dentro da pasta `.xmonad`.
 
-> ~/.xmonad/volume.sh
+> `~/.xmonad/volume.sh`
 
 - Cole o arquivo principal de configuração do xmonad `xmonad.hs` dentro da pasta `.xmonad`.
 
-> ~/.xmonad/xmonad.hs
+> `~/.xmonad/xmonad.hs`
 
 # Recompile o xmonad
 Recopile o xmonad com o comando:
