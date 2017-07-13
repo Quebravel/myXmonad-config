@@ -23,6 +23,7 @@ $ sudo emerge -aq mediainfo
 $ sudo emerge -aq highlight
 $ sudo emerge -aq unrar
 $ sudo emerge -aq odt2txt
+$ sudo emerge -aq x11-apps/xbacklight
 ```
 # Copiando/Colando arquivos para a configuração do xmonad
 
@@ -46,6 +47,20 @@ $ sudo emerge -aq odt2txt
 Recompile o xmonad com o comando:
 
 > `xmonad --recompile`
+
+# Configure o arquivo `.xinitrc` para o Linux carregar o programa `stalonetray`, `pnmixer` e `nm-applet`.
+
+###### Exemplo
+```
+xbacklight -set 50 &
+stalonetray &
+pnmixer &
+if [ -x /usr/bin/nm-applet ] ; then
+   nm-applet --sm-disable &
+nitrogen --restore
+
+exec xmonad
+```
 
 # Problemas
 
