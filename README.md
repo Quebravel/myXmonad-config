@@ -42,7 +42,7 @@ $ sudo emerge -aq odt2txt
 
 ###### ~/.xmonad/xmonad.hs
 
-# Recopile o xmonad
+# Recompile o xmonad
 Recopile o xmonad com o comando:
 
-`xmonad --recopile`
+`xmonad --recompile`
