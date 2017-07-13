@@ -46,3 +46,21 @@ $ sudo emerge -aq odt2txt
 Recopile o xmonad com o comando:
 
 > `xmonad --recompile`
+
+# Problemas
+
+## Xmobar fica atrás das janelas abertas
+
+###### Configure o arquivo `xmonad.hs` na pasta `~/.xmonad`.
+
+- Remova a linha:
+
+`, handleEventHook    = fullscreenEventHook`
+
+- Adicione a linha:
+```
+, handleEventHook = mconcat                         	
+                          [ docksEventHook			
+                          , handleEventHook defaultConfig ]	
+```
+
