@@ -1,11 +1,11 @@
-# Instalando xmonad no gentoo.
+# Instalando xmonad no gentoo
 ```
 $ sudo emerge -aq x11-wm/xmonad
 $ sudo emerge -aq x11-wm/xmonad-contrib
 $ sudo emerge -aq x11-misc/xmobar
 ```
 
-# Instalando programas adicionais.
+# Instalando programas adicionais
 ```
 $ sudo emerge -aq x11-misc/stalonetray
 $ sudo emerge -aq app-misc/ranger
@@ -24,7 +24,7 @@ $ sudo emerge -aq highlight
 $ sudo emerge -aq unrar
 $ sudo emerge -aq odt2txt
 ```
-# Copiando/Colando arquivos para a configuração do xmonad.
+# Copiando/Colando arquivos para a configuração do xmonad
 
 - Cole o arquivo de configuração do Xmobar `.xmobarrc` na pasta principal do usuário.
 
