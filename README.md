@@ -48,7 +48,7 @@ Recompile o xmonad com o comando:
 
 > `xmonad --recompile`
 
-# Configure o arquivo `.xinitrc` para o Linux carregar o programa `stalonetray`, `pnmixer` e `nm-applet`.
+## Configure o arquivo `.xinitrc` para o carregar os programas `stalonetray`, `pnmixer` e `nm-applet`.
 
 ###### Exemplo
 ```
