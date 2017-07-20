@@ -3,26 +3,30 @@
 $ sudo emerge -aq x11-wm/xmonad
 $ sudo emerge -aq x11-wm/xmonad-contrib
 $ sudo emerge -aq x11-misc/xmobar
+$ sudo emerge -aq x11-misc/stalonetray
 ```
 
 # Instalando programas adicionais
 ```
-$ sudo emerge -aq x11-misc/stalonetray
 $ sudo emerge -aq app-misc/ranger
-$ sudo emerge -aq media-sound/cmus
+$ sudo emerge -aq media-sound/moc
 $ sudo emerge -aq media-gfx/feh
 $ sudo emerge -aq media-video/mplayer
 $ sudo emerge -aq x11-misc/dmenu
 $ sudo emerge -aq x11-misc/nitrogen
 $ sudo emerge -aq sys-fs/udiskie
 $ sudo emerge -aq x11-misc/gpaste
-$ sudo emerge -aq x11-terms/xfce4-terminal
+$ sudo emerge -aq x11-terms/xterm
 $ sudo emerge -aq app-text/poppler
 $ sudo emerge -aq app-arch/atool
-$ sudo emerge -aq mediainfo
-$ sudo emerge -aq highlight
-$ sudo emerge -aq unrar
-$ sudo emerge -aq odt2txt
+$ sudo emerge -aq media-video/mediainfo
+$ sudo emerge -aq app-text/highlight
+$ sudo emerge -aq app-arch/unrar
+$ sudo emerge -aq app-arch/rar
+$ sudo emerge -aq app-arch/unzip
+$ sudo emerge -aq app-arch/zip
+$ sudo emerge -aq app-arch/p7zip
+$ sudo emerge -aq app-text/odt2txt
 $ sudo emerge -aq x11-apps/xbacklight
 ```
 # Copiando/Colando arquivos para a configuração do xmonad
@@ -47,6 +51,9 @@ $ sudo emerge -aq x11-apps/xbacklight
 Recompile o xmonad com o comando:
 
 > `xmonad --recompile`
+
+###### OBS 
+Quando for recompilar com xmonad já iniciado não carregue os programas adicionais com o `.xinitrc`.
 
 # Iniciando com startx
 
