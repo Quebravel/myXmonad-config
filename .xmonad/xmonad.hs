@@ -27,7 +27,10 @@ main = do
                         { ppOutput = hPutStrLn xmproc
                         , ppTitle = xmobarColor "green" "" . shorten 50
                         }
-        , handleEventHook    = fullscreenEventHook
+        , handleEventHook    = fullscreenEventHook		-- Ativar se estiver usando Gentoo
+--	, handleEventHook = mconcat                         	-- Ativar
+--                          [ docksEventHook			-- Se estiver
+--                          , handleEventHook defaultConfig ]	-- Usando Arch Linux
 	, modMask = mod4Mask     -- Muda Mod para tecla Windows
         } `additionalKeys`
         [ 
