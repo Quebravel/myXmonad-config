@@ -9,10 +9,9 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.ThreeColumns
 import System.IO
 
-myLayout = tiled ||| Mirror tiled ||| Full ||| 			-- Layout
-ThreeCol 1 (3/100) (1/2) ||| ThreeColMid 1 (3/100) (1/2)        -- Faz a janela
-  where                                                         -- em tela cheia ficar
-    tiled   = Tall 1 (3/100) (3/5)                              -- sem borda
+myLayout = tiled ||| Mirror tiled ||| Full ||| ThreeCol 1 (3/100) (1/2) ||| ThreeColMid 1 (3/100) (1/2)
+  where                                                         
+    tiled   = Tall 1 (3/100) (3/5)                              
 
 main = do
     xmproc <- spawnPipe "xmobar"
