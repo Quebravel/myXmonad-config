@@ -32,8 +32,9 @@ main = do
 	, modMask = mod4Mask     -- Rebind Mod to the Windows key
         } `additionalKeys`
         [ ((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xset dpms force off")
-        , ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s")
-        , ((0, xK_Print), spawn "scrot")
+        , ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s") -- Win + Print = Atalho para tecla Print
+        , ((0, xK_Print), spawn "scrot") -- Telca Print Screen
+	, ((mod4Mask, xK_b), sendMessage ToggleStruts) -- Win + b = oculta o xmobar
         
 -- Volume Control
      , ((mod4Mask,               xK_F11   ), spawn "amixer set Master 5%-")
