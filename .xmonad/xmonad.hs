@@ -6,9 +6,11 @@ import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Hooks.SetWMName
 import XMonad.Layout.NoBorders
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Layout.ThreeColumns
 import System.IO
 
-myLayout = tiled ||| Mirror tiled ||| Full                      -- Faz a janela
+myLayout = tiled ||| Mirror tiled ||| Full ||| 			-- Layout
+ThreeCol 1 (3/100) (1/2) ||| ThreeColMid 1 (3/100) (1/2)        -- Faz a janela
   where                                                         -- em tela cheia ficar
     tiled   = Tall 1 (3/100) (3/5)                              -- sem borda
 
