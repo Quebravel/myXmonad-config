@@ -1,3 +1,5 @@
+![2017-07-24-212320_1366x768_scrot](https://user-images.githubusercontent.com/15035135/28550645-d0765164-70b8-11e7-9f96-a9f9ed2b59e0.png)
+
 # Instalando xmonad no gentoo
 ```
 $ sudo emerge -aq x11-wm/xmonad
