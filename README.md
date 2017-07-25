@@ -1,4 +1,4 @@
-![2017-07-24-212320_1366x768_scrot](https://user-images.githubusercontent.com/15035135/28550645-d0765164-70b8-11e7-9f96-a9f9ed2b59e0.png)
+![2017-07-24-215407_1366x768_scrot](https://user-images.githubusercontent.com/15035135/28550940-fcda0d16-70ba-11e7-9111-c7dd9f8189e9.png)
 
 # Instalando xmonad no gentoo
 ```
