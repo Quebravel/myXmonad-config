@@ -44,12 +44,12 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                              ] 10
 			
 			-- memory usage monitor
-        		, Run Memory         [ "--template" ,"Mem: <usedratio>%"
-                             , "--Low"      , "20"        -- units: %
-                             , "--High"     , "90"        -- units: %
+        		, Run Memory         [ "--template" ,"Mem: <usedratio>% <cache>Mb"
+                             , "--Low"      , "150"        -- units: %
+                             , "--High"     , "900"        -- units: %
                              , "--low"      , "gray"
                              , "--normal"   , "darkorange"
-                             , "--high"     , "darkred"
+                             , "--high"     , "red"
                              ] 10
 
 			-- cpu actividade monitor
