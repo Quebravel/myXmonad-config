@@ -27,17 +27,22 @@ main = do
                         { ppOutput = hPutStrLn xmproc
                         , ppTitle = xmobarColor "green" "" . shorten 50
                         }
-        , handleEventHook    = fullscreenEventHook		-- Ativar se estiver usando Gentoo
---	, handleEventHook = mconcat                         	-- Ativar
---                          [ docksEventHook			-- Se estiver
---                          , handleEventHook defaultConfig ]	-- Usando Arch Linux
+        , handleEventHook    = fullscreenEventHook		-- Ativar no Gentoo | Desativar no Arch
+--	, handleEventHook = mconcat                         	-- Ativar	| Desativar
+--                          [ docksEventHook			-- no		| no
+--                          , handleEventHook defaultConfig ]	-- Arch 	| Gentoo
 	, modMask = mod4Mask     -- Muda Mod para tecla Windows
         } `additionalKeys`
         [ 
           ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s") -- Win + Print = Atalho para tecla Print
-        , ((0, xK_Print), spawn "scrot") -- Telca Print Screen
+        , ((0, xK_Print), spawn "scrot -e 'mv $f ~/Imagens/ 2>/dev/null'") -- Telca Print Screen
 	, ((mod4Mask, xK_b), sendMessage ToggleStruts) -- Win + b = Esconde o xmobar atras das janelas
         , ((mod4Mask, xK_Return), spawn "xterm") -- Win + Enter = Segundo atalho para o terminal
+	, ((mod4Mask, xK_c), kill) -- Fechar janela focada
+	, ((mod4Mask, xK_r), spawn "xterm -e ranger") -- Atalho Ranger Gerenciador de arquivos
+	, ((mod4Mask .|. shiftMask, xK_b), spawn "xterm -e vim ~/.xmobarrc") -- Editar Xmobar
+	, ((mod4Mask .|. shiftMask, xK_x), spawn "xterm -e vim ~/.xmonad/xmonad.hs") -- Editar Xmonad
+	, ((mod4Mask, xK_o), spawn "qutebrowser") -- Atalho para o navegador
 	
 -- Volume Controle
      , ((mod4Mask,               xK_F11   ), spawn "amixer set Master 5%-")
