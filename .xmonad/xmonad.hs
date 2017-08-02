@@ -34,7 +34,7 @@ main = do
 	, modMask = mod4Mask     -- Muda Mod para tecla Windows
         } `additionalKeys`
         [ 
-          ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s") -- Win + Print = Atalho para tecla Print
+          ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s -e 'mv $f ~/Imagens/ 2>/dev/null'") -- Win + Print = Atalho para tecla Print
         , ((0, xK_Print), spawn "scrot -e 'mv $f ~/Imagens/ 2>/dev/null'") -- Telca Print Screen
 	, ((mod4Mask, xK_b), sendMessage ToggleStruts) -- Win + b = Esconde o xmobar atras das janelas
         , ((mod4Mask, xK_Return), spawn "xterm") -- Win + Enter = Segundo atalho para o terminal
