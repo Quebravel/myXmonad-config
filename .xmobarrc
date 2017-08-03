@@ -85,5 +85,5 @@ Config {		  font 			= "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
 			]
         		, sepChar = "%"
         		, alignSep = "}{"
-        		, template = " %StdinReader% | %multicpu% | %memory% | %battery% | %disku% }{ %locks% %dynnetwork% | %coretemp% | %volume% | <fc=#ee9a00>%date%</fc> "
+        		, template = " %StdinReader% | %multicpu% | %memory% | %battery% | %disku% }{ <fc=green>%locks%</fc>  %dynnetwork% | %coretemp% | %volume% | <fc=#ee9a00>%date%</fc> "
    }
