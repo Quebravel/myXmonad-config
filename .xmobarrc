@@ -5,16 +5,16 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
         , fgColor = "grey"
         , position = TopW L 97
 	, commands = [ 
-       			-- mostar intenciade de volume
-			  Run Com            "sh" ["/home/jonatas/.xmonad/volume.sh"] "volume" 10         	
+       			-- mostar intencidade de volume
+			  Run Com "sh"		["/home/jonatas/.xmonad/volume.sh"] "volume" 10         	
 			
 			-- monitor de batéria
-			, Run Battery        [ "--template" , "Bat: <acstatus>"
-                             , "--Low"      , "10"        -- units: %
-                             , "--High"     , "80"        -- units: %
-                             , "--low"      , "darkred"
-                             , "--normal"   , "darkorange"
-                             , "--high"     , "darkgreen"
+			, Run Battery        	[ "--template" , "Bat: <acstatus>"
+                             , "--Low"      	, "10"        -- units: %
+                             , "--High"     	, "80"        -- units: %
+                             , "--low"      	, "darkred"
+                             , "--normal"   	, "darkorange"
+                             , "--high"     	, "darkgreen"
 
                              , "--" -- battery specific options
                                        -- discharging status
@@ -26,40 +26,43 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                              ] 50 
                         
 			-- cpu core temperatura monitor
-		        , Run CoreTemp       [ "--template" , "Temp: <core0>°C <core1>°C"
-                             , "--Low"      , "60"        -- units: °C
-                             , "--High"     , "80"        -- units: °C
-                             , "--low"      , "blue"
-                             , "--normal"   , "darkorange"
-                             , "--high"     , "red"
+		        , Run CoreTemp       	[ "--template" , "Temp: <core0>°C <core1>°C"
+                             , "--Low"      	, "60"        -- units: °C
+                             , "--High"     	, "80"        -- units: °C
+                             , "--low"      	, "blue"
+                             , "--normal"   	, "darkorange"
+                             , "--high"     	, "red"
                              ] 50
                          
-			-- network atividade monitor (dynamic interface resolution)
-        		, Run DynNetwork     [ "--template" , "<dev>: <rx>kB/s <tx>kB/s"
-                             , "--Low"      , "30000"       -- units: B/s
-                             , "--High"     , "60000"       -- units: B/s
-                             , "--low"      , "blueviolet"
-                             , "--normal"   , "orange"
-                             , "--high"     , "red"
+			-- internet monitor (dynamic interface resolution)
+        		, Run DynNetwork     	[ "--template" , "<dev>: <rx>kB/s <tx>kB/s"
+                             , "--Low"      	, "30000"       -- units: B/s
+                             , "--High"     	, "60000"       -- units: B/s
+                             , "--low"      	, "blueviolet"
+                             , "--normal"   	, "orange"
+                             , "--high"     	, "red"
                              ] 10
 			
-			-- memory usage monitor
-        		, Run Memory         [ "--template" ,"Mem: <usedratio>% <cache>Mb"
-                             , "--Low"      , "150"        -- units: %
-                             , "--High"     , "900"        -- units: %
-                             , "--low"      , "gray"
-                             , "--normal"   , "darkorange"
-                             , "--high"     , "red"
+			-- memória monitor
+        		, Run Memory         	[ "--template" ,"Mem: <usedratio>% <cache>Mb"
+                             , "--Low"      	, "150"        -- units: %
+                             , "--High"     	, "900"        -- units: %
+                             , "--low"      	, "gray"
+                             , "--normal"   	, "darkorange"
+                             , "--high"     	, "red"
                              ] 10
 
-			-- cpu actividade monitor
-        		, Run MultiCpu       [ "--template" , "Cpu: <total0>% <total1>% <total2>% <total3>%"
-                             , "--Low"      , "50"         -- units: %
-                             , "--High"     , "85"         -- units: %
-                             , "--low"      , "yellow"
-                             , "--normal"   , "orange"
-                             , "--high"     , "red"
+			-- cpu monitor
+        		, Run MultiCpu       	[ "--template" , "Cpu: <total0>% <total1>% <total2>% <total3>%"
+                             , "--Low"      	, "50"         -- units: %
+                             , "--High"     	, "85"         -- units: %
+                             , "--low"      	, "yellow"
+                             , "--normal"   	, "orange"
+                             , "--high"     	, "red"
                              ] 10
+			
+			-- locks
+			, Run Locks
 			
 			-- mostrar data
 			, Run Date "%A %d %B %Y %H:%M:%S " "date" 10
@@ -70,12 +73,13 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
 			]
         , sepChar = "%"
         , alignSep = "}{"
-        , template = " %StdinReader% | %multicpu% | %memory% | %battery% }{ %dynnetwork% | %coretemp% | %volume% | <fc=#ee9a00>%date%</fc> " --
-        -- general behavior
-   , lowerOnStart 	=     	True    -- send to bottom of window stack on start
-   , hideOnStart 	=      	False   -- start with window unmapped (hidden)
-   , allDesktops 	=      	True    -- show on all desktops
-   , overrideRedirect 	= 	True    -- set the Override Redirect flag (Xlib)
-   , pickBroadest 	=     	False   -- choose widest display (multi-monitor)
-   , persistent 	=	True    -- enable/disable hiding (True = disabled)
-	}
+        , template = " %StdinReader% | %multicpu% | %memory% | %battery% }{ %locks% %dynnetwork% | %coretemp% | %volume% | <fc=#ee9a00>%date%</fc> " --
+   
+   			-- general behavior
+   			, lowerOnStart 		=     	True    -- send to bottom of window stack on start
+   			, hideOnStart 		=      	False   -- start with window unmapped (hidden)
+   			, allDesktops 		=      	True    -- show on all desktops
+   			, overrideRedirect 	= 	True    -- set the Override Redirect flag (Xlib)
+   			, pickBroadest 		=     	False   -- choose widest display (multi-monitor)
+   			, persistent 		=	True    -- enable/disable hiding (True = disabled)
+			}
