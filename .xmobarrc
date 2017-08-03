@@ -26,9 +26,9 @@ Config {		  font 			= "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                                        -- discharging status
                                        , "-o"	, "<left>% (<timeleft>)"
                                        -- AC "on" status
-                                       , "-O"	, "<fc=#dAA520>Carregando</fc>"
+                                       , "-O"	, "<fc=yellow>AC</fc>"
                                        -- charged status
-                                       , "-i"	, "<fc=#006000>Cheio</fc>"
+                                       , "-i"	, "<fc=darkgreen>100%</fc>"
                              			] 50 
                         
 			-- TEMPERATURA
