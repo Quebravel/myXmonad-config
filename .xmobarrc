@@ -50,7 +50,7 @@ Config {		  font 			= "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                              			] 10
 			
 			-- MEMÓRIA RAM
-        		, Run Memory         	[ "--template" ,"Mem: <usedratio>% <cache>Mb"
+        		, Run Memory         	[ "--template" ,"Mem: <cache>Mb"
                              , "--Low"      	, "150"        -- units: %
                              , "--High"     	, "900"        -- units: %
                              , "--low"      	, "gray"
