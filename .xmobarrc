@@ -10,9 +10,10 @@ Config {		  font 			= "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
    			, pickBroadest 		= False   -- choose widest display (multi-monitor)
    			, persistent 		= True    -- enable/disable hiding (True = disabled)
 			, commands = [ 
-       			-- VOLUME
-			  Run Com "sh"		["/home/jonatas/.xmonad/volume.sh"] "volume" 10         	
-			
+       			
+			-- VOLUME
+			  Run Com "sh"		["/home/jonatas/.xmonad/volume.sh"] "volume" 10
+			  
 			-- BATÉRIA
 			, Run Battery        	[ "--template" , "Bat: <acstatus>"
                              , "--Low"      	, "10"        -- units: %
@@ -66,6 +67,12 @@ Config {		  font 			= "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                              , "--high"     	, "red"
                              			] 10
 			
+			-- HD
+			, Run DiskU 		[("/", "<used>/<size>"), ("/dev/sda4", "<usedbar>")
+						]
+						["-L", "20", "-H", "50", "-m", "1", "-p", "3"
+						] 20
+			
 			-- LOCKS
 			, Run Locks
 			
@@ -78,5 +85,5 @@ Config {		  font 			= "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
 			]
         		, sepChar = "%"
         		, alignSep = "}{"
-        		, template = " %StdinReader% | %multicpu% | %memory% | %battery% }{ %locks% %dynnetwork% | %coretemp% | %volume% | <fc=#ee9a00>%date%</fc> "
+        		, template = " %StdinReader% | %multicpu% | %memory% | %battery% | %disku% }{ %locks% %dynnetwork% | %coretemp% | %volume% | <fc=#ee9a00>%date%</fc> "
    }
