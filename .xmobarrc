@@ -50,9 +50,9 @@ Config {		  font 			= "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                              			] 10
 			
 			-- MEMÓRIA RAM
-        		, Run Memory         	[ "--template" ,"Mem: <cache>Mb"
-                             , "--Low"      	, "150"        -- units: %
-                             , "--High"     	, "900"        -- units: %
+        		, Run Memory         	[ "--template" ,"Mem: <used>Mb"
+                             , "--Low"      	, "500"        -- units: %
+                             , "--High"     	, "3000"       -- units: %
                              , "--low"      	, "gray"
                              , "--normal"   	, "darkorange"
                              , "--high"     	, "red"
@@ -77,7 +77,7 @@ Config {		  font 			= "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
 			, Run Locks
 			
 			-- DATA
-			, Run Date "%A %d %B %Y %H:%M:%S " "date" 10
+			, Run Date "%A %d %B %H:%M:%S " "date" 10
                         
 			-- BARRA TITULO/TAGS
 			, Run StdinReader
