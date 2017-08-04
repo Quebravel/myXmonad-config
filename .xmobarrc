@@ -20,7 +20,7 @@ Config {		  font 			= "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                              , "--High"     	, "80"        -- units: %
                              , "--low"      	, "darkred"
                              , "--normal"   	, "darkorange"
-                             , "--high"     	, "darkgreen"
+                             , "--high"     	, "darkcyan"
 
                              , "--" -- battery specific options
                                        -- discharging status
@@ -28,7 +28,7 @@ Config {		  font 			= "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                                        -- AC "on" status
                                        , "-O"	, "<fc=yellow>AC</fc>"
                                        -- charged status
-                                       , "-i"	, "<fc=darkgreen>100%</fc>"
+                                       , "-i"	, "<fc=darkcyan>100</fc>%"
                              			] 50 
                         
 			-- TEMPERATURA
@@ -85,5 +85,5 @@ Config {		  font 			= "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
 			]
         		, sepChar = "%"
         		, alignSep = "}{"
-        		, template = " %StdinReader% | %multicpu% | %memory% | %battery% | %disku% }{ <fc=green>%locks%</fc>  %dynnetwork% | %coretemp% | %volume% | <fc=#ee9a00>%date%</fc> "
+        		, template = " %StdinReader% | %multicpu% | %memory% | %battery% | HD: %disku% }{ <fc=green>%locks%</fc>  %dynnetwork% | %coretemp% | %volume% | <fc=#ee9a00>%date%</fc> "
    }
