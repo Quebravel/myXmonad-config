@@ -7,7 +7,13 @@ import XMonad.Hooks.SetWMName
 import XMonad.Layout.NoBorders
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.ThreeColumns
+import XMonad.Actions.FloatKeys
 import System.IO
+
+myManageHook = composeAll
+    [ className =? "Gimp"        --> doFloat
+    , className =? "Steam"       --> doFloat
+    ]
 
 myLayout = tiled ||| Mirror tiled ||| Full ||| ThreeCol 1 (3/100) (1/2) ||| ThreeColMid 1 (3/100) (1/2)
   where                                                         
@@ -17,7 +23,7 @@ main = do
     xmproc <- spawnPipe "xmobar"
 
     xmonad $ defaultConfig
-        { manageHook = manageDocks <+> manageHook defaultConfig
+        { manageHook = manageDocks <+> myManageHook <+> manageHook defaultConfig
 	, borderWidth        = 1
 	, focusedBorderColor = "darkgray"
 	, normalBorderColor  = "black"
@@ -28,7 +34,7 @@ main = do
                         , ppTitle = xmobarColor "green" "" . shorten 50
                         }
         , handleEventHook    = fullscreenEventHook		-- Ativar no Gentoo | Desativar no Arch
---	, handleEventHook = mconcat                         	-- Ativar	| Desativar
+--      , handleEventHook = mconcat                         	-- Ativar	| Desativar
 --                          [ docksEventHook			-- no		| no
 --                          , handleEventHook defaultConfig ]	-- Arch 	| Gentoo
 	, modMask = mod4Mask     -- Muda Mod para tecla Windows
@@ -43,6 +49,21 @@ main = do
 	, ((mod4Mask .|. shiftMask, xK_b), spawn "xterm -e vim ~/.xmobarrc") -- Editar Xmobar
 	, ((mod4Mask .|. shiftMask, xK_x), spawn "xterm -e vim ~/.xmonad/xmonad.hs") -- Editar Xmonad
 	, ((mod4Mask, xK_o), spawn "qutebrowser") -- Atalho para o navegador
+	
+	, ((mod4Mask, xK_Left), withFocused (keysMoveWindow (-20,0)))
+        , ((mod4Mask, xK_Right), withFocused (keysMoveWindow (20,0)))
+        , ((mod4Mask, xK_Up), withFocused (keysMoveWindow (0,-20)))
+        , ((mod4Mask, xK_Down), withFocused (keysMoveWindow (0,20)))
+
+        , ((mod1Mask .|. controlMask    , xK_Left), withFocused (keysResizeWindow (20,0) (1,0)))
+        , ((mod1Mask .|. controlMask    , xK_Right), withFocused (keysResizeWindow (-20,0) (1,0)))
+        , ((mod1Mask .|. controlMask    , xK_Up), withFocused (keysResizeWindow (0,20) (0,1)))
+        , ((mod1Mask .|. controlMask    , xK_Down), withFocused (keysResizeWindow (0,-20) (0,1)))
+
+        , ((mod1Mask .|. shiftMask      , xK_Left), withFocused (keysResizeWindow (-20,0) (0,0)))
+        , ((mod1Mask .|. shiftMask      , xK_Up), withFocused (keysResizeWindow (0,-20) (0,0)))
+        , ((mod1Mask .|. shiftMask      , xK_Down), withFocused (keysResizeWindow (0,20) (0,0)))
+        , ((mod1Mask .|. shiftMask      , xK_Right), withFocused (keysResizeWindow (20,0) (0,0)))
 	
 -- Volume Controle
      , ((mod4Mask,               xK_F11   ), spawn "amixer set Master 5%-")
