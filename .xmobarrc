@@ -32,7 +32,7 @@ Config {		  font 			= "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                              			] 50 
                         
 			-- TEMPERATURA
-		        , Run CoreTemp       	[ "--template" , "Temp: <core0>°C <core1>°C"
+		        , Run CoreTemp       	[ "--template" , "<core0>°C <core1>°C"
                              , "--Low"      	, "60"        -- units: °C
                              , "--High"     	, "80"        -- units: °C
                              , "--low"      	, "blue"
@@ -41,7 +41,7 @@ Config {		  font 			= "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                              			] 50
                          
 			-- INTERNET (dynamic interface resolution)
-        		, Run DynNetwork     	[ "--template" , "<dev>: <rx>kB/s <tx>kB/s"
+        		, Run DynNetwork     	[ "--template" , "<rx>kB/s <tx>kB/s"
                              , "--Low"      	, "30000"       -- units: B/s
                              , "--High"     	, "60000"       -- units: B/s
                              , "--low"      	, "blueviolet"
@@ -59,25 +59,19 @@ Config {		  font 			= "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                              			] 10
 
 			-- CPU
-        		, Run MultiCpu       	[ "--template" , "Cpu: <total0>% <total1>% <total2>% <total3>%"
+        		, Run MultiCpu       	[ "--template" , "<total0>% <total1>% <total2>% <total3>%"
                              , "--Low"      	, "50"         -- units: %
                              , "--High"     	, "85"         -- units: %
                              , "--low"      	, "yellow"
                              , "--normal"   	, "orange"
                              , "--high"     	, "red"
                              			] 10
-			
-			-- HD
-			, Run DiskU 		[("/", "<used>/<size>"), ("/dev/sda4", "<usedbar>")
-						]
-						["-L", "20", "-H", "50", "-m", "1", "-p", "3"
-						] 20
-			
+						
 			-- LOCKS
 			, Run Locks
 			
 			-- DATA
-			, Run Date "%A %d %B %H:%M:%S " "date" 10
+			, Run Date "%A %D %H:%M:%S " "date" 10
                         
 			-- BARRA TITULO/TAGS
 			, Run StdinReader
@@ -85,5 +79,5 @@ Config {		  font 			= "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
 			]
         		, sepChar = "%"
         		, alignSep = "}{"
-        		, template = " %StdinReader% | %multicpu% | %memory% | %battery% | HD: %disku% }{ <fc=green>%locks%</fc>  %dynnetwork% | %coretemp% | %volume% | <fc=#ee9a00>%date%</fc> "
+        		, template = " %StdinReader% | %multicpu% | %memory% | %battery% }{ <fc=hotpink>%locks%</fc> %dynnetwork% | %coretemp% | %volume% | <fc=#ee9a00>%date%</fc> "
    }
