@@ -3,12 +3,12 @@ Config {		  font 			= "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
         		, bgColor 		= "black"
         		, fgColor 		= "grey"
         		, position 		= TopW L 97
-			, lowerOnStart 		= True    -- send to bottom of window stack on start
-   			, hideOnStart 		= False   -- start with window unmapped (hidden)
-   			, allDesktops 		= True    -- show on all desktops
-   			, overrideRedirect 	= True    -- set the Override Redirect flag (Xlib)
-   			, pickBroadest 		= False   -- choose widest display (multi-monitor)
-   			, persistent 		= True    -- enable/disable hiding (True = disabled)
+			, lowerOnStart 		= True
+   			, hideOnStart 		= False
+   			, allDesktops 		= True
+   			, overrideRedirect 	= True
+   			, pickBroadest 		= False
+   			, persistent 		= True
 			, commands = [ 
        			
 			-- VOLUME
@@ -71,7 +71,7 @@ Config {		  font 			= "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
 			, Run Locks
 			
 			-- DATA
-			, Run Date "%A %D %H:%M:%S " "date" 10
+			, Run Date "%A %d/%m/%y %H:%M:%S " "date" 10
                         
 			-- BARRA TITULO/TAGS
 			, Run StdinReader
