@@ -63,6 +63,7 @@ Quando for recompilar com xmonad já iniciado não carregue os programas adicion
 
 ###### Exemplo
 ```
+[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 xbacklight -set 50 &
 stalonetray &
 pnmixer &
