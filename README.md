@@ -15,7 +15,6 @@ $ sudo emerge -aq media-sound/moc
 $ sudo emerge -aq media-gfx/feh
 $ sudo emerge -aq media-video/mplayer
 $ sudo emerge -aq x11-misc/dmenu
-$ sudo emerge -aq x11-misc/nitrogen
 $ sudo emerge -aq sys-fs/udiskie
 $ sudo emerge -aq x11-misc/gpaste
 $ sudo emerge -aq x11-terms/xterm
