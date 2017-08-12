@@ -69,7 +69,9 @@ stalonetray &
 pnmixer &
 if [ -x /usr/bin/nm-applet ] ; then
    nm-applet --sm-disable &
-nitrogen --restore
+fi   
+feh --bg-scale ~/Wallpapers/papeldeParede-1366x768.jpg &
+numlockx &
 
 exec xmonad
 ```
