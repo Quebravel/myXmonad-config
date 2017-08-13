@@ -86,12 +86,12 @@ exec xmonad
 
 - Remova a linha:
 ```
- , handleEventHook    = fullscreenEventHook`
+, handleEventHook = fullscreenEventHook
 ```
 - Adicione a linha:
 ```
-, handleEventHook = mconcat                         	
-                          [ docksEventHook			
-                          , handleEventHook defaultConfig ]	
+, handleEventHook = mconcat                         
+                        [ docksEventHook
+                        , handleEventHook defaultConfig ]
 ```
 
