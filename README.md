@@ -33,7 +33,14 @@ $ sudo emerge -aq x11-apps/xbacklight                    $ sudo pacman -S extra/
 $ sudo emerge -aq media-sound/pnmixer                    $ yaourt -S aur/pnmixer
 $ sudo emerge -aq x11-apps/xfd                           $ sudo pacman -S extra/xorg-xfd
 ```
-# Copiando/Colando arquivos para a configuração do xmonad
+# Instalando/colando com comandos
+> `git clone https://github.com/Quebravel/myXmonad-config.git && cd myXmonad-config`
+
+> `cp -r .stalonetrayrc .xmobarrc .xmonad/ ~/`
+
+> `cd - && rm -rf myXmonad-config || ls -la`
+
+# Copiando/Colando manualmente arquivos para a configuração do xmonad
 
 - Cole o arquivo de configuração do Xmobar `.xmobarrc` na pasta principal do usuário.
 
