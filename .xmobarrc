@@ -49,11 +49,23 @@ Config {		  font 			= "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
                              , "--high"     	, "red"
                              			] 10
 			
+			-- SINAL WIFI
+                         , Run Wireless "wlp2s0"
+                        [ "-a", "l"
+                             , "-x", "-"
+                             , "-t", "<fc=blueviolet><essid> <quality></fc>%"
+                             , "-L", "40"
+                             , "-H", "70"
+                             , "-l", "red" 
+                             , "-n", "blueviolet"
+                             , "-h", "blueviolet"
+						] 10
+			
 			-- MEMÓRIA RAM
-        		, Run Memory         	[ "--template" ,"Mem: <used>Mb"
-                             , "--Low"      	, "500"        -- units: %
-                             , "--High"     	, "3000"       -- units: %
-                             , "--low"      	, "gray"
+			, Run Memory		[ "--template" ,"Mem: <used>Mb"
+                             , "--Low"		, "500"        -- units: %
+                             , "--High"		, "3000"       -- units: %
+                             , "--low"		, "gray"
                              , "--normal"   	, "darkorange"
                              , "--high"     	, "red"
                              			] 10
@@ -80,4 +92,4 @@ Config {		  font 			= "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
         		, sepChar = "%"
         		, alignSep = "}{"
         		, template = " %StdinReader% | %multicpu% | %memory% | %battery% }{ <fc=hotpink>%locks%</fc> %dynnetwork% | %coretemp% | %volume% | <fc=#ee9a00>%date%</fc> "
-   }
+				}
