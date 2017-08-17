@@ -1,11 +1,12 @@
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.SetWMName
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
-import XMonad.Hooks.SetWMName
 import XMonad.Layout.NoBorders
-import XMonad.Hooks.EwmhDesktops
+import XMonad.Layout.Minimize
 import XMonad.Layout.ThreeColumns
 import XMonad.Actions.FloatKeys
 import System.IO
@@ -15,7 +16,7 @@ myManageHook = composeAll
     , className =? "Steam"       --> doFloat
     ]
 
-myLayout = tiled ||| Mirror tiled ||| Full ||| ThreeCol 1 (3/100) (1/2)
+myLayout = tiled ||| Mirror tiled ||| minimize Full ||| ThreeCol 1 (3/100) (1/2)
   where                                                         
     tiled   = Tall 1 (3/100) (3/5)                              
 
@@ -49,28 +50,33 @@ main = do
 	, ((mod4Mask .|. shiftMask, xK_b), spawn "xterm -e vim ~/.xmobarrc") -- Editar Xmobar
 	, ((mod4Mask .|. shiftMask, xK_x), spawn "xterm -e vim ~/.xmonad/xmonad.hs") -- Editar Xmonad
 	, ((mod4Mask, xK_o), spawn "qutebrowser") -- Atalho para o navegador
-
--- Controle Janela
+	
+	-- Controle Janela
 	, ((mod4Mask, xK_Left), withFocused (keysMoveWindow (-20,0)))
         , ((mod4Mask, xK_Right), withFocused (keysMoveWindow (20,0)))
         , ((mod4Mask, xK_Up), withFocused (keysMoveWindow (0,-20)))
         , ((mod4Mask, xK_Down), withFocused (keysMoveWindow (0,20)))
-
+	
 	, ((mod1Mask .|. shiftMask , xK_Left), withFocused (keysResizeWindow (20,0) (1,0)))
         , ((mod1Mask .|. shiftMask , xK_Right), withFocused (keysResizeWindow (-20,0) (1,0)))
         , ((mod1Mask .|. shiftMask , xK_Up), withFocused (keysResizeWindow (0,20) (0,1))) 
         , ((mod1Mask .|. shiftMask , xK_Down), withFocused (keysResizeWindow (0,-20) (0,1)))
-
+	
         , ((mod1Mask .|. controlMask , xK_Left), withFocused (keysResizeWindow (-20,0) (0,0)))
         , ((mod1Mask .|. controlMask , xK_Right), withFocused (keysResizeWindow (20,0) (0,0)))
         , ((mod1Mask .|. controlMask , xK_Up), withFocused (keysResizeWindow (0,-20) (0,0)))
         , ((mod1Mask .|. controlMask , xK_Down), withFocused (keysResizeWindow (0,20) (0,0)))
-
--- Volume Controle
-     , ((mod4Mask,               xK_F11   ), spawn "amixer set Master 5%-")
-     , ((mod4Mask,               xK_F12   ), spawn "amixer set Master 5%+")
-   
--- Brilho Controle
-     , ((mod4Mask,               xK_F4    ), spawn "xbacklight -dec 10")
-     , ((mod4Mask,               xK_F5    ), spawn "xbacklight -inc 10")
+	
+	-- Minimizar janela
+        , ((mod4Mask, xK_n     ), withFocused minimizeWindow)
+        , ((mod4Mask .|. shiftMask, xK_n     ), sendMessage RestoreNextMinimizedWin
+	
+	-- Volume Controle
+	, ((mod4Mask,               xK_F11   ), spawn "amixer set Master 5%-")
+	, ((mod4Mask,               xK_F12   ), spawn "amixer set Master 5%+")
+	
+	-- Brilho Controle
+	, ((mod4Mask,               xK_F4    ), spawn "xbacklight -dec 10")
+	, ((mod4Mask,               xK_F5    ), spawn "xbacklight -inc 10")
 	]
+	
