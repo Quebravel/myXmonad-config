@@ -12,9 +12,9 @@ import XMonad.Actions.FloatKeys
 import System.IO
 
 myManageHook = composeAll
-    [ className =? "Gimp"        --> doFloat
-    , className =? "Steam"       --> doFloat
-    ]
+    	[ className =? "Gimp"        --> doFloat
+    	, className =? "Steam"       --> doFloat
+    	]
 
 myLayout = tiled ||| Mirror tiled ||| minimize Full ||| ThreeCol 1 (3/100) (1/2)
   where                                                         
@@ -25,7 +25,7 @@ main = do
 
     xmonad $ defaultConfig
         { manageHook = manageDocks <+> myManageHook <+> manageHook defaultConfig
-	, borderWidth        = 1
+	, borderWidth = 1
 	, focusedBorderColor = "darkgray"
 	, normalBorderColor  = "black"
 	, startupHook = setWMName "LG3D"
@@ -34,11 +34,11 @@ main = do
                         { ppOutput = hPutStrLn xmproc
                         , ppTitle = xmobarColor "green" "" . shorten 50
                         }
-        , handleEventHook    = fullscreenEventHook		-- Ativar no Gentoo | Desativar no Arch
+        , handleEventHook = fullscreenEventHook		-- Ativar no Gentoo | Desativar no Arch
 --      , handleEventHook = mconcat                         	-- Ativar	| Desativar
 --                          [ docksEventHook			-- no		| no
 --                          , handleEventHook defaultConfig ]	-- Arch 	| Gentoo
-	, modMask = mod4Mask     -- Muda Mod para tecla Windows
+	, modMask = mod4Mask -- Muda tecla Alt pela tecla Windows
         } `additionalKeys`
         [ 
           ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s -e 'mv $f ~/Imagens/ 2>/dev/null'") -- Win + Print = Atalho para tecla Print
@@ -68,15 +68,15 @@ main = do
         , ((mod1Mask .|. controlMask , xK_Down), withFocused (keysResizeWindow (0,20) (0,0)))
 	
 	-- Minimizar janela
-        , ((mod4Mask, xK_n     ), withFocused minimizeWindow)
-        , ((mod4Mask .|. shiftMask, xK_n     ), sendMessage RestoreNextMinimizedWin
+        , ((mod4Mask, xK_n), withFocused minimizeWindow)
+        , ((mod4Mask .|. shiftMask, xK_n), sendMessage RestoreNextMinimizedWin)
 	
 	-- Volume Controle
-	, ((mod4Mask,               xK_F11   ), spawn "amixer set Master 5%-")
-	, ((mod4Mask,               xK_F12   ), spawn "amixer set Master 5%+")
+	, ((mod4Mask, xK_F11), spawn "amixer set Master 5%-")
+	, ((mod4Mask, xK_F12), spawn "amixer set Master 5%+")
 	
 	-- Brilho Controle
-	, ((mod4Mask,               xK_F4    ), spawn "xbacklight -dec 10")
-	, ((mod4Mask,               xK_F5    ), spawn "xbacklight -inc 10")
+	, ((mod4Mask, xK_F4), spawn "xbacklight -dec 10")
+	, ((mod4Mask, xK_F5), spawn "xbacklight -inc 10")
 	]
 	
