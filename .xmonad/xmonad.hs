@@ -6,7 +6,6 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Layout.NoBorders
-import XMonad.Layout.Minimize
 import XMonad.Layout.ThreeColumns
 import XMonad.Actions.FloatKeys
 import System.IO
@@ -16,7 +15,7 @@ myManageHook = composeAll
     	, className =? "Steam"       --> doFloat
     	]
 
-myLayout = tiled ||| Mirror tiled ||| minimize Full ||| ThreeCol 1 (3/100) (1/2)
+myLayout = tiled ||| Mirror tiled ||| Full ||| ThreeCol 1 (3/100) (1/2)
   where                                                         
     tiled   = Tall 1 (3/100) (3/5)                              
 
@@ -66,10 +65,6 @@ main = do
         , ((mod1Mask .|. controlMask , xK_Right), withFocused (keysResizeWindow (20,0) (0,0)))
         , ((mod1Mask .|. controlMask , xK_Up), withFocused (keysResizeWindow (0,-20) (0,0)))
         , ((mod1Mask .|. controlMask , xK_Down), withFocused (keysResizeWindow (0,20) (0,0)))
-	
-	-- Minimizar janela
-        , ((mod4Mask, xK_n), withFocused minimizeWindow)
-        , ((mod4Mask .|. shiftMask, xK_n), sendMessage RestoreNextMinimizedWin)
 	
 	-- Volume Controle
 	, ((mod4Mask, xK_F11), spawn "amixer set Master 5%-")
