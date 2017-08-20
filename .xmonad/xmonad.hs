@@ -71,6 +71,7 @@ main = do
 	-- Volume Controle
 	, ((mod4Mask, xK_F11), spawn "amixer set Master 5%-")
 	, ((mod4Mask, xK_F12), spawn "amixer set Master 5%+")
+	, ((mod4Mask, xK_F10), spawn "amixer set Master toggle")
 	
 	-- Brilho Controle
 	, ((mod4Mask, xK_F4), spawn "xbacklight -dec 10")
