@@ -8,6 +8,7 @@ import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Layout.NoBorders
 import XMonad.Layout.ThreeColumns
 import XMonad.Actions.FloatKeys
+import XMonad.Actions.NoBorders
 import System.IO
 
 myManageHook = composeAll
@@ -49,6 +50,7 @@ main = do
 	, ((mod4Mask .|. shiftMask, xK_b), spawn "xterm -e vim ~/.xmobarrc") -- Editar Xmobar
 	, ((mod4Mask .|. shiftMask, xK_x), spawn "xterm -e vim ~/.xmonad/xmonad.hs") -- Editar Xmonad
 	, ((mod4Mask, xK_o), spawn "qutebrowser") -- Atalho para o navegador
+	, ((mod4Mask .|. controlMask, xK_b), withFocused toggleBorder) -- Retira/Adiciona borda na janela
 	
 	-- Controle Janela
 	, ((mod4Mask, xK_Left), withFocused (keysMoveWindow (-20,0)))
