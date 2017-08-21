@@ -100,5 +100,4 @@ Config {		  font 			= "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
 			]
         		, sepChar = "%"
         		, alignSep = "}{"
-        		, template = " %StdinReader% | %multicpu% | %memory% | %battery% }{ <fc=hotpink>%locks%</fc> %dynnetwork% | %coretemp% | %default:Master% | <fc=#ee9a00>%date%</fc> "
-				}
+        		, template = " %StdinReader% | %multicpu% | %memory% | %battery% }{ <fc=hotpink>%locks%</fc> %dynnetwork% | %coretemp% | %default:Master% | <fc=#ee9a00>%date%</fc>  " }
