@@ -4,7 +4,7 @@
 ```
 $ sudo emerge -aq x11-wm/xmonad                          $ sudo pacman -S community/xmonad
 $ sudo emerge -aq x11-wm/xmonad-contrib                  $ sudo pacman -S community/xmonad-contrib
-$ sudo emerge -aq x11-misc/xmobar                        $ sudo pacman -S community/xmobar
+$ sudo emerge -aq x11-misc/xmobar                        $ yaourt -S aur/xmobar-alsa
 $ sudo emerge -aq x11-misc/stalonetray                   $ sudo pacman -S community/stalonetray
 ```
 
