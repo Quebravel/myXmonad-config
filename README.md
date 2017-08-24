@@ -39,14 +39,14 @@ $ sudo emerge -aq x11-apps/xfd                           $ sudo pacman -S extra/
 ## Instalando/colando com comandos
 > `git clone https://github.com/Quebravel/myXmonad-config.git && cd myXmonad-config`
 
-> `cp -r .stalonetrayrc .xmobarrc .xmonad/ ~/`
+> `cp -r .stalonetrayrc .xmonad/ ~/`
 
 > `cd - && rm -rf myXmonad-config || ls -la`
 
 ## Copiando/Colando manualmente se preferir (Opcional)
-- Cole o arquivo de configuração do Xmobar `.xmobarrc` na pasta principal do usuário.
+- Cole o arquivo de configuração do Xmobar `.xmobar.hs` na pasta `.xmonad`.
 
-> `~/.xmobarrc`
+> `~/.xmobar.hs`
 
 - Cole o arquivo de configuração do Stalonetray `.stalonetrayrc` na pasta principal do usuário.
 
