@@ -23,7 +23,7 @@ myLayout = tiled ||| Mirror tiled ||| Full ||| ThreeCol 1 (3/100) (1/2)
 myTerminal = "xterm"
 
 main = do
-    xmproc <- spawnPipe "xmobar"
+    xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar.hs"
 
     xmonad $ defaultConfig
         { manageHook = manageDocks <+> myManageHook <+> manageHook defaultConfig
@@ -50,7 +50,7 @@ main = do
         , ((mod4Mask, xK_Return), spawn myTerminal) -- Win + Enter = Segundo atalho para o terminal
 	, ((mod4Mask, xK_c), kill) -- Fechar janela focada
 	, ((mod4Mask, xK_r), spawn "xterm -e ranger") -- Atalho Ranger Gerenciador de arquivos
-	, ((mod4Mask .|. shiftMask, xK_b), spawn "xterm -e vim ~/.xmobarrc") -- Editar Xmobar
+	, ((mod4Mask .|. shiftMask, xK_b), spawn "xterm -e vim ~/.xmonad/xmobar.hs") -- Editar Xmobar
 	, ((mod4Mask .|. shiftMask, xK_x), spawn "xterm -e vim ~/.xmonad/xmonad.hs") -- Editar Xmonad
 	, ((mod4Mask, xK_o), spawn "qutebrowser") -- Atalho para o navegador
 	, ((mod4Mask .|. controlMask, xK_b), withFocused toggleBorder) -- Retira/Adiciona borda na janela
