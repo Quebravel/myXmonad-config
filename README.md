@@ -30,7 +30,7 @@ $ sudo emerge -aq x11-misc/numlockx                      $ sudo pacman -S commun
 $ sudo emerge -aq x11-misc/gpaste                        $ sudo pacman -S extra/gpaste
 $ sudo emerge -aq x11-terms/xterm                        $ sudo pacman -S extra/xterm
 $ sudo emerge -aq x11-apps/xbacklight                    $ sudo pacman -S extra/xorg-xbacklight
-$ sudo emerge -aq media-sound/pnmixer                    $ yaourt -S aur/pnmixer
+$ sudo emerge -aq media-sound/pnmixer (Opcional)         $ yaourt -S aur/pnmixer (Opcional)
 $ sudo emerge -aq x11-apps/xfd                           $ sudo pacman -S extra/xorg-xfd
 ```
 # Arquivos para a configuração do xmonad
@@ -77,12 +77,13 @@ Quando for recompilar com xmonad já iniciado não carregue os programas adicion
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 xbacklight -set 50 &
 stalonetray &
-pnmixer &
+#pnmixer &
 if [ -x /usr/bin/nm-applet ] ; then
    nm-applet --sm-disable &
 fi   
 feh --bg-scale ~/Wallpapers/papeldeParede-1366x768.jpg &
 numlockx &
+xsetroot -cursor_name left_ptr &
 
 exec xmonad
 ```
