@@ -20,6 +20,8 @@ myLayout = tiled ||| Mirror tiled ||| Full ||| ThreeCol 1 (3/100) (1/2)
   where                                                         
     tiled   = Tall 1 (3/100) (3/5)                              
 
+myTerminal = "xterm"
+
 main = do
     xmproc <- spawnPipe "xmobar"
 
@@ -29,6 +31,7 @@ main = do
 	, focusedBorderColor = "darkgray"
 	, normalBorderColor  = "black"
 	, startupHook = setWMName "LG3D"
+	, terminal = myTerminal
 	, layoutHook = avoidStruts $ smartBorders $ myLayout
 	, logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
@@ -44,7 +47,7 @@ main = do
           ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s -e 'mv $f ~/Imagens/ 2>/dev/null'") -- Win + Print = Atalho para tecla Print
         , ((0, xK_Print), spawn "scrot -e 'mv $f ~/Imagens/ 2>/dev/null'") -- Telca Print Screen
 	, ((mod4Mask, xK_b), sendMessage ToggleStruts) -- Win + b = Esconde o xmobar atras das janelas
-        , ((mod4Mask, xK_Return), spawn "xterm") -- Win + Enter = Segundo atalho para o terminal
+        , ((mod4Mask, xK_Return), spawn myTerminal) -- Win + Enter = Segundo atalho para o terminal
 	, ((mod4Mask, xK_c), kill) -- Fechar janela focada
 	, ((mod4Mask, xK_r), spawn "xterm -e ranger") -- Atalho Ranger Gerenciador de arquivos
 	, ((mod4Mask .|. shiftMask, xK_b), spawn "xterm -e vim ~/.xmobarrc") -- Editar Xmobar
