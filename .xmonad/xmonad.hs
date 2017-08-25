@@ -72,12 +72,12 @@ main = do
         , ((mod1Mask .|. controlMask , xK_Down), withFocused (keysResizeWindow (0,20) (0,0)))
 	
 	-- Volume Controle
-	, ((mod4Mask, xK_F11), spawn "amixer set Master 5%-")
-	, ((mod4Mask, xK_F12), spawn "amixer set Master 5%+")
+	, ((mod4Mask, xK_F11), spawn "amixer set Master 2%-")
+	, ((mod4Mask, xK_F12), spawn "amixer set Master 2%+")
 	, ((mod4Mask, xK_F10), spawn "amixer set Master toggle")
 	
 	-- Brilho Controle
-	, ((mod4Mask, xK_F4), spawn "xbacklight -dec 10")
-	, ((mod4Mask, xK_F5), spawn "xbacklight -inc 10")
+	, ((mod4Mask, xK_F4), spawn "xbacklight -dec 2")
+	, ((mod4Mask, xK_F5), spawn "xbacklight -inc 2")
 	]
 	
