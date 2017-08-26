@@ -87,6 +87,18 @@ xsetroot -cursor_name left_ptr &
 
 exec xmonad
 ```
+# Fonte adicional para o xmobar
+
+- No gentoo é preciso baixar no site oficial [ProFont](http://tobiasjung.name/profont/) e instalar em:
+
+```
+$ sudo mv profont-x11 /usr/share/fonts/
+```
+
+- No Arch é só baixar
+```
+$ sudo pacman -S community/profont
+```
 
 # Problemas
 
