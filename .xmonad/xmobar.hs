@@ -93,7 +93,8 @@ Config {  font			= "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
 			
 	-- DATA
 	-- , Run Date "%A %d/%m/%y %H:%M:%S " "date" 10
-        , Run Com "sh" ["/home/jonatas/.xmonad/date.sh"] "date" 10
+        -- , Run Com "sh" ["/home/jonatas/.xmonad/date.sh"] "date" 10
+	, Run Com "date" ["+%A %d/%m/%y %H:%M:%S"] "mydate" 10
 			
 	-- BARRA TITULO/TAGS
 	, Run StdinReader
