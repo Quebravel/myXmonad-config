@@ -102,5 +102,5 @@ Config {  font			= "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
 	]
 	, sepChar = "%"
 	, alignSep = "}{"
-	, template = " %StdinReader% | %multicpu% | %memory% | %battery% }{ <fc=hotpink>%locks%</fc> %dynnetwork% %wlp2s0wi% | %coretemp% | %default:Master% | <fc=#ee9a00>%date%</fc>  " }
-	--, template = " <fn=1>%StdinReader% | %multicpu% | %memory% | %battery%</fn> }{ <fn=1><fc=hotpink>%locks%</fc> | %dynnetwork% %wlp2s0wi% | %coretemp% | %default:Master% | <fc=#ee9a00>%date%</fc></fn>  " }
+	, template = " %StdinReader% | %multicpu% | %memory% | %battery% }{ <fc=hotpink>%locks%</fc> %dynnetwork% %wlp2s0wi% | %coretemp% | %default:Master% | <fc=#ee9a00>%mydate%</fc>  " }
+	--, template = " <fn=1>%StdinReader% | %multicpu% | %memory% | %battery%</fn> }{ <fn=1><fc=hotpink>%locks%</fc> | %dynnetwork% %wlp2s0wi% | %coretemp% | %default:Master% | <fc=#ee9a00>%mydate%</fc></fn>  " }
