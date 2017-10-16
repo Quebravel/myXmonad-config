@@ -37,10 +37,10 @@ main = do
                         { ppOutput = hPutStrLn xmproc
                         , ppTitle = xmobarColor "green" "" . shorten 50
                         }
-        , handleEventHook = fullscreenEventHook		-- Ativar no Gentoo | Desativar no Arch
---      , handleEventHook = mconcat                         	-- Ativar	| Desativar
---                          [ docksEventHook			-- no		| no
---                          , handleEventHook defaultConfig ]	-- Arch 	| Gentoo
+        , handleEventHook = mconcat
+                          [ docksEventHook
+                          , handleEventHook defaultConfig
+			  , fullscreenEventHook ]
 	, modMask = mod4Mask -- Muda tecla Alt pela tecla Windows
         } `additionalKeys`
         [ 
