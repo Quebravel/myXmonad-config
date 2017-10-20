@@ -28,7 +28,7 @@ main = do
     xmonad $ defaultConfig
         { manageHook = manageDocks <+> myManageHook <+> manageHook defaultConfig
 	, borderWidth = 1
-	, focusedBorderColor = "darkgray"
+	, focusedBorderColor = "hotpink"
 	, normalBorderColor  = "black"
 	, startupHook = setWMName "LG3D"
 	, terminal = myTerminal
