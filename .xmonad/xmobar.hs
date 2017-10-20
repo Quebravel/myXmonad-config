@@ -87,7 +87,7 @@ Config {  font = "-Misc-Fixed-Regular-R-Normal-*-13-*-*-*-*-*-*-*"
        , Run MultiCpu       	[ "--template" , "<total0>% <total1>% <total2>% <total3>%"
        , "--Low"      	, "50"         -- units: %
        , "--High"     	, "85"         -- units: %
-       , "--low"      	, "yellow"
+       , "--low"      	, "grey"
        , "--normal"   	, "orange"
        , "--high"     	, "red"
        ] 10
