@@ -1,4 +1,4 @@
-Config {  font = "-misc-fixed-*-*-*-*-10-*-*-*-*-*-*-*"
+Config {  font = "-Misc-Fixed-Regular-R-Normal-*-13-*-*-*-*-*-*-*"
        , additionalFonts = [ "xft:ProFont-11" ]
        , borderColor = "black"
        , border = TopB
