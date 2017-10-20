@@ -52,9 +52,13 @@ main = do
 	, ((mod4Mask, xK_r), spawn "xterm -e ranger") -- Atalho Ranger Gerenciador de arquivos
 	, ((mod4Mask .|. shiftMask, xK_b), spawn "xterm -e vim ~/.xmonad/xmobar.hs") -- Editar Xmobar
 	, ((mod4Mask .|. shiftMask, xK_x), spawn "xterm -e vim ~/.xmonad/xmonad.hs") -- Editar Xmonad
-	, ((mod4Mask, xK_o), spawn "qutebrowser") -- Atalho para o navegador
+	, ((mod4Mask, xK_o), spawn "google-chrome-stable") -- Atalho para o navegador
+	, ((mod4Mask, 0xff9e), spawn "shutdown -h now") -- Desligar
+	, ((mod4Mask, 0xff9f), spawn "shutdown -r now") -- Reiniciar
+	, ((mod4Mask, 0xff8d), spawn "xfce4-terminal") -- Terminal Xfce
+--	, ((mod4Mask, xK_p), spawn "rofi -show run -width 100 -location 1") -- Rofi
 	, ((mod4Mask .|. controlMask, xK_b), withFocused toggleBorder) -- Retira/Adiciona borda na janela
-	
+		
 	-- Controle Janela
 	, ((mod4Mask, xK_Left), withFocused (keysMoveWindow (-20,0)))
         , ((mod4Mask, xK_Right), withFocused (keysMoveWindow (20,0)))
@@ -72,12 +76,12 @@ main = do
         , ((mod1Mask .|. controlMask , xK_Down), withFocused (keysResizeWindow (0,20) (0,0)))
 	
 	-- Volume Controle
-	, ((mod4Mask, xK_F11), spawn "amixer set Master 2%-")
-	, ((mod4Mask, xK_F12), spawn "amixer set Master 2%+")
+	, ((mod4Mask, xK_F11), spawn "amixer set Master 3%-")
+	, ((mod4Mask, xK_F12), spawn "amixer set Master 3%+")
 	, ((mod4Mask, xK_F10), spawn "amixer set Master toggle")
 	
 	-- Brilho Controle
-	, ((mod4Mask, xK_F4), spawn "xbacklight -dec 2")
-	, ((mod4Mask, xK_F5), spawn "xbacklight -inc 2")
+	, ((mod4Mask, xK_F4), spawn "xbacklight -dec 3")
+	, ((mod4Mask, xK_F5), spawn "xbacklight -inc 3")
 	]
 	
