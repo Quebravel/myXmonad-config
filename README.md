@@ -32,6 +32,7 @@ $ sudo emerge -aq x11-terms/xterm                        $ sudo pacman -S extra/
 $ sudo emerge -aq x11-apps/xbacklight                    $ sudo pacman -S extra/xorg-xbacklight
 $ sudo emerge -aq media-sound/pnmixer (Opcional)         $ yaourt -S aur/pnmixer (Opcional)
 $ sudo emerge -aq x11-apps/xfd                           $ sudo pacman -S extra/xorg-xfd
+$ sudo emerge -aq media-gfx/scrot                        $ sudo pacman -S community/scrot
 ```
 # Arquivos para a configuração do xmonad
 
