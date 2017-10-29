@@ -1,8 +1,8 @@
 Config {  font = "-Misc-Fixed-Regular-R-Normal-*-13-*-*-*-*-*-*-*"
        , additionalFonts = [ "xft:ProFont-11" ]
-       , borderColor = "black"
+       , borderColor = "#1a1a1a"
        , border = TopB
-       , bgColor = "black"
+       , bgColor = "#1a1a1a"
        , fgColor = "grey"
        , alpha = 255
        , position = TopW L 97
