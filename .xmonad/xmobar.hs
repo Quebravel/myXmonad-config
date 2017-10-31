@@ -54,9 +54,9 @@ Config {  font = "-Misc-Fixed-Regular-R-Normal-*-13-*-*-*-*-*-*-*"
        ] 50
 
        -- INTERNET (dynamic interface resolution)
-       , Run DynNetwork     	[ "--template" , "<rx>kB/s <tx>kB/s"
-       , "--Low"      	, "30000"       -- units: B/s
-       , "--High"     	, "60000"       -- units: B/s
+       , Run DynNetwork     	[ "--template" , "<fc=#ff0066><dev></fc> <rx>kB/s <tx>kB/s"
+       , "--Low"      	, "30000"       -- units: Kb/s
+       , "--High"     	, "60000"       -- units: Kb/s
        , "--low"      	, "blueviolet"
        , "--normal"   	, "orange"
        , "--high"     	, "red"
@@ -106,5 +106,5 @@ Config {  font = "-Misc-Fixed-Regular-R-Normal-*-13-*-*-*-*-*-*-*"
        ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %StdinReader% | %multicpu% | %memory% | %battery% }{ <fc=hotpink>%locks%</fc> %dynnetwork% %wlp2s0wi% | %coretemp% | %default:Master% | <fc=#ee9a00>%mydate%</fc>  " }
---     , template = " <fn=1>%StdinReader% | %multicpu% | %memory% | %battery%</fn> }{ <fn=1><fc=hotpink>%locks%</fc> | %dynnetwork% %wlp2s0wi% | %coretemp% | %default:Master% | <fc=#ee9a00>%mydate%</fc></fn>  " }
+       , template = " %StdinReader% | %multicpu% | %memory% | %battery% }{ <fc=gray>%locks%</fc> | %dynnetwork% %wlp2s0wi% | %coretemp% | %default:Master% | <fc=#ee9a00>%mydate%</fc>  " }
+--     , template = " <fn=1>%StdinReader% | %multicpu% | %memory% | %battery%</fn> }{ <fn=1><fc=gray>%locks%</fc> | %dynnetwork% %wlp2s0wi% | %coretemp% | %default:Master% | <fc=#ee9a00>%mydate%</fc></fn>  " }
