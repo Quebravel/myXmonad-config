@@ -4,7 +4,7 @@
 Config {  font = "-Misc-Fixed-Regular-R-Normal-*-13-*-*-*-*-*-*-*"
        , additionalFonts = [ "xft:ProFont-11" ] --(adicione no make.conf USE="xft" para o xmobar ser compilado com essa extenção)
        , borderColor = "#1a1a1a"
-       , border = TopB
+       , border = NoBorder
        , bgColor = "#1a1a1a"
        , fgColor = "grey"
        , alpha = 255
