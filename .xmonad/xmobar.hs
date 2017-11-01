@@ -1,5 +1,8 @@
+-- Todas as Frags USE="" para ativar todas as extenções:
+-- mpd mpris timezone with_conduit with_uvmeter alsa dbus inotify wifi xft xpm
+
 Config {  font = "-Misc-Fixed-Regular-R-Normal-*-13-*-*-*-*-*-*-*"
-       , additionalFonts = [ "xft:ProFont-11" ]
+       , additionalFonts = [ "xft:ProFont-11" ] --(adicione no make.conf USE="xft" para o xmobar ser compilado com essa extenção)
        , borderColor = "#1a1a1a"
        , border = TopB
        , bgColor = "#1a1a1a"
@@ -17,10 +20,8 @@ Config {  font = "-Misc-Fixed-Regular-R-Normal-*-13-*-*-*-*-*-*-*"
        , overrideRedirect = True
        , commands = [
 
-       -- VOLUME BASH
---       Run Com "sh" ["/home/jonatas/.xmonad/volume.sh"] "volume" 10
-       -- VOLUME NATIVO
-       Run Volume "default" "Master" [ "--template" , "<status>"
+       -- VOLUME
+       Run Volume "default" "Master" [ "--template" , "<status>" --(adicione no make.conf USE="alsa" para o xmobar ser compilado com essa extenção)
        , "--"
        , "--on", "<fc=#00ccff>Vol: <volume></fc>%"
        , "--onc", "gray"
@@ -63,7 +64,7 @@ Config {  font = "-Misc-Fixed-Regular-R-Normal-*-13-*-*-*-*-*-*-*"
        ] 10
 
        -- SINAL WIFI
---       ,  Run Wireless "wlp2s0" --( Usar somente com o wifi, caso contrário o xmobar não funcionará.)
+--       ,  Run Wireless "wlp2s0" --(adicione no make.conf USE="wifi" para o xmobar ser compilado com essa extenção) (%wlp2s0wi%)
 --       [ "-a", "l"
 --       , "-x", "-"
 --       , "-t", "<fc=blueviolet><essid> <quality></fc>%"
