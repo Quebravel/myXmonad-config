@@ -1,5 +1,6 @@
 -- Todas as Frags USE="" para ativar todas as extenções:
 -- mpd mpris timezone with_conduit with_uvmeter alsa dbus inotify wifi xft xpm
+-- O workspace padrão de inicio dependera em qual workspace você esta depois de fazer a recompilação.
 
 Config {  font = "-Misc-Fixed-Regular-R-Normal-*-13-*-*-*-*-*-*-*"
        , additionalFonts = [ "xft:ProFont-11" ] --(adicione no make.conf USE="xft" para o xmobar ser compilado com essa extenção)
