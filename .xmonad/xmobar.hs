@@ -4,10 +4,10 @@
 
 Config {  font = "-Misc-Fixed-Regular-R-Normal-*-13-*-*-*-*-*-*-*"
        , additionalFonts = [ "xft:ProFont-11" ] --(adicione no make.conf USE="xft" para o xmobar ser compilado com essa extenção)
-       , borderColor = "#1a1a1a"
+       , borderColor = "#1A1A1A"
        , border = NoBorder
-       , bgColor = "#1a1a1a"
-       , fgColor = "grey"
+       , bgColor = "#1A1A1A"
+       , fgColor = "8A8A8A"
        , alpha = 255
        , position = TopW L 97
        , textOffset = -1
