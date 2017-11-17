@@ -4,10 +4,10 @@
 
 Config {  font = "-Misc-Fixed-Regular-R-Normal-*-13-*-*-*-*-*-*-*"
        , additionalFonts = [ "xft:ProFont-11" ] --(adicione no make.conf USE="xft" para o xmobar ser compilado com essa extenção)
-       , borderColor = "#1A1A1A"
+       , borderColor = "#1C1C1C"
        , border = NoBorder
-       , bgColor = "#1A1A1A"
-       , fgColor = "8A8A8A"
+       , bgColor = "#1C1C1C"
+       , fgColor = "#d7d7af"
        , alpha = 255
        , position = TopW L 97
        , textOffset = -1
@@ -24,74 +24,72 @@ Config {  font = "-Misc-Fixed-Regular-R-Normal-*-13-*-*-*-*-*-*-*"
        -- VOLUME
        Run Volume "default" "Master" [ "--template" , "<status>" --(adicione no make.conf USE="alsa" para o xmobar ser compilado com essa extenção)
        , "--"
-       , "--on", "<fc=#00ccff>Vol: <volume></fc>%"
-       , "--onc", "gray"
+       , "--on", "<fc=#ffff66>Vol: <volume></fc>%"
+       , "--onc", "#859900"
        , "--off", "<fc=#dc322f>Vol: MUDO</fc>"
        , "--offc", "#dc322f"
        ] 10
 
        -- BATÉRIA
---       , Run Battery        	[ "--template" , "Bat: <acstatus>"
---       , "--Low"      	, "10"        -- units: %
---       , "--High"     	, "80"        -- units: %
---       , "--low"      	, "darkred"
---       , "--normal"   	, "darkorange"
---       , "--high"     	, "darkcyan"
---       , "--" -- battery specific options
+       , Run Battery           [ "--template" , "Bat: <acstatus>"
+       , "--Low"      , "10"        -- units: %
+       , "--High"     , "80"        -- units: %
+       , "--low"      , "#d70000"
+       , "--high"     , "#00afaf"
+       , "--" -- battery specific options
        -- discharging status
---       , "-o"	, "<left>% (<timeleft>)"
+       , "-o"  , "<left>% (<timeleft>)"
        -- AC "on" status
---       , "-O"	, "<fc=yellow>AC</fc>"
+       , "-O"  , "<fc=#af8700>AC</fc>"
        -- charged status
---       , "-i"	, "<fc=darkcyan>100</fc>%"
---       ] 50
+       , "-i"  , "<fc=#af005f>100</fc>%"
+       ] 50
 
        -- TEMPERATURA
-       , Run CoreTemp       	[ "--template" , "<core0>°C <core1>°C"
-       , "--Low"      	, "60"        -- units: °C
-       , "--High"     	, "80"        -- units: °C
-       , "--low"      	, "blue"
-       , "--normal"   	, "darkorange"
-       , "--high"     	, "red"
+       , Run CoreTemp          [ "--template" , "<core0>°C <core1>°C"
+       , "--Low"      , "60"        -- units: °C
+       , "--High"     , "80"        -- units: °C
+       , "--low"      , "#268bd2"
+       , "--normal"   , "#af8700"
+       , "--high"     , "#d70000"
        ] 50
 
        -- INTERNET (dynamic interface resolution)
-       , Run DynNetwork     	[ "--template" , "<fc=#ff0066><dev></fc> <rx>kB/s <tx>kB/s"
-       , "--Low"      	, "30000"       -- units: Kb/s
-       , "--High"     	, "60000"       -- units: Kb/s
-       , "--low"      	, "blueviolet"
-       , "--normal"   	, "orange"
-       , "--high"     	, "red"
+       , Run DynNetwork        [ "--template" , "<fc=#ff0066><dev></fc> <rx>kB/s <tx>kB/s"
+       , "--Low"      , "30000"       -- units: Kb/s
+       , "--High"     , "60000"       -- units: Kb/s
+       , "--low"      , "#ffffd7"
+       , "--high"     , "#d70000"
        ] 10
 
        -- SINAL WIFI
---       ,  Run Wireless "wlp2s0" --(adicione no make.conf USE="wifi" para o xmobar ser compilado com essa extenção) (%wlp2s0wi%)
---       [ "-a", "l"
---       , "-x", "-"
---       , "-t", "<fc=blueviolet><essid> <quality></fc>%"
---       , "-L", "40"
---       , "-H", "70"
---       , "-l", "red" 
---       , "-n", "blueviolet"
---       , "-h", "blueviolet"
---       ] 10
+       ,  Run Wireless "wlan0" --(adicione no make.conf USE="wifi" para o xmobar ser compilado com essa extenção) (%wlp2s0wi%)
+       [ "-a", "l"
+       , "-x", "-"
+       , "-t", "<fc=#00afaf><essid> <quality></fc>%"
+       , "-L", "40"
+       , "-H", "70"
+       , "-l", "#d70000"
+       , "-n", "#af8700"
+       , "-h", "#00afaf"
+       ] 10
 
        -- MEMÓRIA RAM
-       , Run Memory		[ "--template" ,"Mem: <used>Mb"
-       , "--Low"		, "500"        -- units: %
-       , "--High"		, "3000"       -- units: %
-       , "--low"		, "gray"
-       , "--normal"   	, "darkorange"
-       , "--high"     	, "red"
+       , Run Memory     [ "--template" ,"Mem: <used>Mb"
+       , "--Low"        , "500"        -- units: %
+       , "--High"       , "3000"       -- units: %
+       , "--low"        , "#ffffd7"
+       , "--normal"     , "#af8700"
+       , "--high"       , "#d70000"
        ] 10
 
        -- CPU
-       , Run MultiCpu       	[ "--template" , "<total0>% <total1>% <total2>% <total3>%"
-       , "--Low"      	, "50"         -- units: %
-       , "--High"     	, "85"         -- units: %
-       , "--low"      	, "grey"
-       , "--normal"   	, "orange"
-       , "--high"     	, "red"
+       , Run MultiCpu   [ "--template" , "<total0>% <total1>% <total2>% <total3>%"
+       , "--Low"        , "50"         -- units: %
+       , "--High"       , "85"         -- units: %
+       , "--low"        , "#ffffd7"
+       , "--normal"     , "#d75f00"
+       , "--high"       , "#d70000"
        ] 10
 
        -- LOCKS
@@ -108,5 +106,5 @@ Config {  font = "-Misc-Fixed-Regular-R-Normal-*-13-*-*-*-*-*-*-*"
        ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %StdinReader% | %multicpu% | %memory% | %battery% }{ <fc=gray>%locks%</fc> | %dynnetwork% %wlp2s0wi% | %coretemp% | %default:Master% | <fc=#ee9a00>%mydate%</fc>  " }
---     , template = " <fn=1>%StdinReader% | %multicpu% | %memory% | %battery%</fn> }{ <fn=1><fc=gray>%locks%</fc> | %dynnetwork% %wlp2s0wi% | %coretemp% | %default:Master% | <fc=#ee9a00>%mydate%</fc></fn>  " }
+       , template = " %StdinReader% | %multicpu% | %memory% | %battery% }{ <fc=#ffffd7>%locks%</fc> | %dynnetwork% %wlp2s0wi% | %coretemp% | %default:Master% | <fc=#d75f00>%mydate%</fc>  " }
+--     , template = " <fn=1>%StdinReader% | %multicpu% | %memory% | %battery%</fn> }{ <fn=1><fc=#ffffd7>%locks%</fc> | %dynnetwork% %wlan0wi% | %coretemp% | %default:Master% | <fc=#d75f00>%mydate%</fc></fn>  " }
