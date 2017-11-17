@@ -25,7 +25,7 @@ Config {  font = "-Misc-Fixed-Regular-R-Normal-*-13-*-*-*-*-*-*-*"
        Run Volume "default" "Master" [ "--template" , "<status>" --(adicione no make.conf USE="alsa" para o xmobar ser compilado com essa extenção)
        , "--"
        , "--on", "<fc=#ffff66>Vol: <volume></fc>%"
-       , "--onc", "#859900"
+       , "--onc", "#d7d7af"
        , "--off", "<fc=#dc322f>Vol: MUDO</fc>"
        , "--offc", "#dc322f"
        ] 10
