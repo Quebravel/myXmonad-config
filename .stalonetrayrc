@@ -2,7 +2,7 @@ decorations none
 transparent false
 dockapp_mode none
 geometry 3x1-0+0
-background "#1a1a1a"
+background "#1c1c1c"
 kludges force_icons_size
 grow_gravity NE
 icon_gravity NE
