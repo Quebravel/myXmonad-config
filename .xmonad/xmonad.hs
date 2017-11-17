@@ -84,14 +84,13 @@ main = do
 	
 	, ((0, 0x1008FF11), spawn "amixer -q sset Master 2%-")
         , ((0, 0x1008FF13), spawn "amixer -q sset Master 2%+")
-        , ((0, 0x1008FF12), spawn "amixer set Master toggle")
+	, ((0, 0x1008FF12), spawn "amixer set Master toggle")
 	
 	-- Brilho Controle
 	, ((mod4Mask, xK_F4), spawn "xbacklight -dec 6")
 	, ((mod4Mask, xK_F5), spawn "xbacklight -inc 6")
 	
 	, ((0, 0x1008ff02), spawn "xbacklight +10")
-        , ((0, 0x1008ff03), spawn "xbacklight -10")
+	, ((0, 0x1008ff03), spawn "xbacklight -10")
 	
 	]
-	
