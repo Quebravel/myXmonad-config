@@ -28,14 +28,16 @@ main = do
     xmonad $ defaultConfig
         { manageHook = manageDocks <+> myManageHook <+> manageHook defaultConfig
 	, borderWidth = 1
-	, focusedBorderColor = "hotpink"
-	, normalBorderColor  = "black"
+	, focusedBorderColor = "#af005f"
+	, normalBorderColor  = "#262626"
 	, startupHook = setWMName "LG3D"
 	, terminal = myTerminal
 	, layoutHook = avoidStruts $ smartBorders $ myLayout
 	, logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
-                        , ppTitle = xmobarColor "green" "" . shorten 50
+                        , ppTitle = xmobarColor "#0087ff" "" . shorten 50
+			, ppCurrent = xmobarColor "#2aa198" "" . wrap "[" "]"
+                        , ppLayout = xmobarColor "#ffff66" ""
                         }
         , handleEventHook = mconcat
                           [ docksEventHook
@@ -80,8 +82,16 @@ main = do
 	, ((mod4Mask, xK_F12), spawn "amixer set Master 5%+")
 	, ((mod4Mask, xK_F10), spawn "amixer set Master toggle")
 	
+	, ((0, 0x1008FF11), spawn "amixer -q sset Master 2%-")
+        , ((0, 0x1008FF13), spawn "amixer -q sset Master 2%+")
+        , ((0, 0x1008FF12), spawn "amixer set Master toggle")
+	
 	-- Brilho Controle
 	, ((mod4Mask, xK_F4), spawn "xbacklight -dec 6")
 	, ((mod4Mask, xK_F5), spawn "xbacklight -inc 6")
+	
+	, ((0, 0x1008ff02), spawn "xbacklight +10")
+        , ((0, 0x1008ff03), spawn "xbacklight -10")
+	
 	]
 	
