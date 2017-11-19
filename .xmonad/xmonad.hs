@@ -58,7 +58,7 @@ main = do
 	, ((mod4Mask, 0xff9e), spawn "shutdown -h now") -- Desligar
 	, ((mod4Mask, 0xff9f), spawn "shutdown -r now") -- Reiniciar
 	, ((mod4Mask, 0xff8d), spawn "xfce4-terminal") -- Terminal Xfce
---	, ((mod4Mask, xK_p), spawn "rofi -show run -width 100 -location 1") -- Rofi
+	, ((mod4Mask, xK_p), spawn "rofi -show run -width 60 -location 1 -columns 2") -- Rofi
 	, ((mod4Mask .|. controlMask, xK_b), withFocused toggleBorder) -- Retira/Adiciona borda na janela
 		
 	-- Controle Janela
