@@ -30,7 +30,7 @@ main = do
 	, borderWidth = 1
 	, focusedBorderColor = "#af005f"
 	, normalBorderColor  = "#262626"
-	, startupHook = setWMName "LG3D"
+	, startupHook = setWMName "LG3D" -- <+> startup
 	, terminal = myTerminal
 	, layoutHook = avoidStruts $ smartBorders $ myLayout
 	, logHook = dynamicLogWithPP xmobarPP
@@ -94,3 +94,13 @@ main = do
 	, ((0, 0x1008ff03), spawn "xbacklight -10")
 	
 	]
+
+-- startup :: X()
+-- startup = do
+-- spawn "numlockx"
+-- spawn "[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources"
+-- spawn "xbacklight -set 40"
+-- spawn "stalonetray"
+-- spawn "feh --bg-scale ~/Imagens/adwaita-night.jpg"
+-- spawn "xsetroot -cursor_name left_ptr"
+-- spawn "Xcursor.theme: Adwaita"
