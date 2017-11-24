@@ -1442,5 +1442,3 @@ spawn "xbacklight -set 40"
 spawn "stalonetray"
 spawn "feh --bg-scale ~/Imagens/adwaita-night.jpg"
 spawn "xsetroot -cursor_name left_ptr"
-spawn "Xcursor.theme: Adwaita"
-
