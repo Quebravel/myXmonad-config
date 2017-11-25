@@ -104,3 +104,4 @@ main = do
 -- spawn "feh --bg-scale ~/Imagens/adwaita-night.jpg"
 -- spawn "xsetroot -cursor_name left_ptr"
 -- spawn "Xcursor.theme: Adwaita"
+-- spawn "xcompmgr"
