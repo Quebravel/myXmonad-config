@@ -1354,6 +1354,7 @@ myManageHook =
         manageSpecific
     <+> manageDocks
 --    <+> namedScratchpadManageHook scratchpads
+    <+> manageHook defaultConfig
     <+> fullscreenManageHook
     <+> manageSpawn
     where
