@@ -246,7 +246,7 @@ projects =
 
 -- | Uses supplied function to decide which action to run depending on current workspace name.
 
-myTerminal          = "xterm"
+myTerminal          = "urxvt"
 myAltTerminal       = "xfce4-terminal"
 myBrowser           = "google-chrome-stable" -- chrome with WS profile dirs
 myBrowserClass      = "Google-chrome-stable"
@@ -990,7 +990,7 @@ myKeys conf = let
     [ ("M-p"                    , addName "Launcher"                        $ spawn myLauncher)
     , ("M-<Return>"             , addName "Terminal"                        $ spawn myTerminal)
     , ("M-<KP_Enter>"           , addName "Terminal"                        $ spawn myAltTerminal)
-    , ("M-r"                    , addName "Ranger"                          $ spawn "xterm -e ranger")
+    , ("M-r"                    , addName "Ranger"                          $ spawn "urxvt -e ranger")
     , ("<Print>"                , addName "Print full"                      $ spawn "scrot -e 'mv $f ~/Imagens/ 2>/dev/null'")
     , ("M-<Print>"              , addName "Print por seleção"               $ spawn "sleep 0.2; scrot -s -e 'mv $f ~/Imagens/ 2>/dev/null'")
     , ("M-o"                    , addName "Browser"                         $ spawn myBrowser)
