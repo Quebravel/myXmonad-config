@@ -8,19 +8,14 @@
 --     _|      _|  _|      _|    _|_|    _|    _|    _|_|_|    _|_|_|    --
 --                                                                       --
 ---------------------------------------------------------------------------
--- Ethan Schoonover <es@ethanschoonover.com> @ethanschoonover            --
--- https://github.com/altercation                                        --
+--                               Fork from                               --
+--      Ethan Schoonover <es@ethanschoonover.com> @ethanschoonover       --
+--                     https://github.com/altercation                    --
 ---------------------------------------------------------------------------
--- current as of XMonad 0.12
-
-------------------------------------------------------------------------
--- TODO                                                                 
+--                       current as of XMonad 0.13                       --
 ---------------------------------------------------------------------------
-
-------------------------------------------------------------------------
--- Modules                                                              
+--                                Modules                                --
 ---------------------------------------------------------------------------
---import Control.Monad (liftM2)             -- myManageHookShift
 import Control.Monad (liftM, liftM2, join)  -- myManageHookShift
 import Data.List
 import qualified Data.Map as M
@@ -45,11 +40,9 @@ import XMonad.Actions.Navigation2D
 import XMonad.Actions.Promote               -- promote window to master
 import XMonad.Actions.SinkAll
 import XMonad.Actions.SpawnOn
---import XMonad.Actions.Volume
 import XMonad.Actions.WindowGo
 import XMonad.Actions.WithAll               -- action all the things
 import XMonad.Actions.FloatKeys
-
 
 import XMonad.Hooks.DynamicLog              -- for xmobar
 import XMonad.Hooks.DynamicProperty         -- 0.12 broken; works with github version
@@ -60,7 +53,6 @@ import XMonad.Hooks.ManageDocks             -- avoid xmobar
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.UrgencyHook
 
---import XMonad.Layout hiding ( (|||) )       -- ||| from X.L.LayoutCombinators
 import XMonad.Layout.Accordion
 import XMonad.Layout.BinarySpacePartition
 import XMonad.Layout.BorderResize
@@ -71,7 +63,6 @@ import XMonad.Layout.DecorationMadness      -- testing alternative accordion sty
 import XMonad.Layout.Dishes
 import XMonad.Layout.DragPane
 import XMonad.Layout.Drawer
-import XMonad.Layout.Fullscreen
 import XMonad.Layout.Gaps
 import XMonad.Layout.Hidden
 import XMonad.Layout.LayoutBuilder
@@ -80,7 +71,6 @@ import XMonad.Layout.LayoutScreens
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.NoFrillsDecoration
-import XMonad.Layout.OneBig
 import XMonad.Layout.PerScreen              -- Check screen width & adjust layouts
 import XMonad.Layout.PerWorkspace           -- Configure layouts on a per-workspace
 import XMonad.Layout.Reflect
@@ -124,8 +114,8 @@ import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
 
 
-------------------------------------------------------------------------
--- Main                                                                 
+---------------------------------------------------------------------------
+-- Main                                                                    
 ---------------------------------------------------------------------------
 
 main = do
@@ -140,7 +130,6 @@ main = do
     xmonad
         $ dynamicProjects projects
         $ withNavigation2DConfig myNav2DConf
-        -- $ withUrgencyHook NoUrgencyHook
         $ withUrgencyHook LibNotifyUrgencyHook
         $ ewmh
         $ addDescrKeys' ((myModMask, xK_F1), showKeybindings) myKeys
@@ -164,8 +153,8 @@ myConfig p = def
         }
 
 
-------------------------------------------------------------------------
--- Workspaces                                                           
+---------------------------------------------------------------------------
+-- Workspaces                                                              
 ---------------------------------------------------------------------------
 
 wsAV    = "AV"
@@ -201,7 +190,7 @@ projects =
 
     , Project   { projectName       = wsWRK
                 , projectDirectory  = "~/"
-                , projectStartHook  = Just $ do spawnOn wsWRK myBrowser
+                , projectStartHook  = Just $ do spawnOn wsWRK myAltTerminal
                 }
 
     , Project   { projectName       = wsWRK2
@@ -240,8 +229,8 @@ projects =
 --                }
     ]
 
-------------------------------------------------------------------------
--- Applications                                                         
+---------------------------------------------------------------------------
+-- Applications                                                            
 ---------------------------------------------------------------------------
 
 -- | Uses supplied function to decide which action to run depending on current workspace name.
@@ -250,8 +239,9 @@ myTerminal          = "urxvt"
 myAltTerminal       = "xfce4-terminal"
 myBrowser           = "google-chrome-stable" -- chrome with WS profile dirs
 myBrowserClass      = "Google-chrome-stable"
-myAltBrowser        = "sh /home/jonatas/firefox.sh"
-myStatusBar         = "xmobar -x0 /home/jonatas/.xmonad/xmobar.hs"
+myAltBrowser        = "firefox"
+myStatusBar         = "xmobar -x0 ~/.xmonad/xmobar.hs"
+myIDE               = "./eclipse/java-oxygen/eclipse/eclipse"
 --myMail              = "/opt/google/chrome/google-chrome --profile-directory=Default --app-id=bplaligjlefkphkdgeohajfaojnnfnpm"
 myMail              = "/opt/google/chrome/google-chrome --profile-directory=Default --app-id=egddcdhcadfhcbheacnhikllgjokeico"
 myKeep              = "/opt/google/chrome/google-chrome --profile-directory=Default --app-id=hcfcmgpnmpinpidjdgejehjchlbglpde"
@@ -284,58 +274,8 @@ myLauncher          = "rofi -show run -width 60 -location 1 -columns 2"
 
 -- TODO: change this to a lookup for all workspaces
 
-{-
-hangoutsCommand     = myBrowser ++ " --app-id=knipolnnllmklapflnccelgolnpehhpl"
-hangoutsTitle     = "Google Hangouts - es@ethanschoonover.com"
-hangoutsPrefix      = "Google Hangouts"
-hangoutsResource    = "crx_nckgahadagoaajjgafhacjanaoiihapd"
-isHangoutsFor s     = (className =? myBrowserClass
-                      <&&> fmap (isPrefixOf hangoutsPrefix) title
-                      <&&> fmap (isInfixOf s) title)
-isPersonalHangouts  = isHangoutsFor "ethanschoonover"
-isWorkHangouts      = isHangoutsFor "eschoonover"
-
--- TODO: change this to a lookup for all workspaces
-trelloCommand       = "dex $HOME/.local/share/applications/Trello.desktop"
-trelloWorkCommand   = "dex $HOME/.local/share/applications/TrelloWork.desktop"
-trelloWork2Command  = "dex $HOME/.local/share/applications/TrelloWork2.desktop"
-trelloInfix         = "Trello"
-trelloResource      = "crx_jijnmpkkfkjaihbhffejemnpbbglahim"
-trelloWorkResource  = "crx_fkbbihpadkgbnhphndjgblgelahbiede"
-trelloWork2Resource = "crx_bgemgoheeofmogacohnlmpldjlogegoh"
-isTrello            = (resource =? trelloResource)
-isTrelloWork        = (resource =? trelloWorkResource)
-isTrelloWork2       = (resource =? trelloWork2Resource)
-
-isMplayer           = (resource =? mplayerResource)
-
-googleMusicCommand  = "dex $HOME/.local/share/applications/Music.desktop"
-googleMusicInfix    = "Google Play Music"
-googleMusicResource = "crx_ioljlgoncmlkbcepmminebblkddfjofl"
-isGoogleMusic       = (resource =? googleMusicResource)
-
-plexCommand         = "dex $HOME/.local/share/applications/Plex.desktop"
-plexInfix           = "Plex"
-plexResource        = "crx_fpniocchabmgenibceglhnfeimmdhdfm"
-isPlex              = (resource =? plexResource)
-
-isConsole           = (className =? "Terminator")
-                    <&&> (stringProperty "WM_WINDOW_ROLE" =? "Scratchpad")
-myConsole           = "terminator -T console -p console --role=Scratchpad"
-
-scratchpads =
-    [   (NS "hangoutsPersonal"  hangoutsCommand isPersonalHangouts defaultFloating)
-    ,   (NS "hangoutsWork"  hangoutsCommand isWorkHangouts defaultFloating)
-    ,   (NS "trello"  trelloCommand isTrello nonFloating)
-    ,   (NS "trelloWork"  trelloWorkCommand isTrelloWork nonFloating)
-    ,   (NS "googleMusic"  googleMusicCommand isGoogleMusic nonFloating)
-    ,   (NS "plex"  plexCommand isPlex defaultFloating)
-    ,   (NS "console"  myConsole isConsole nonFloating)
-    ,   (NS "xawtv" "xawtv" (resource =? "xawtv") (customFloating $ W.RationalRect (2/3) (1/6) (1/5) (1/3)) )
-    ] 
- -}
-------------------------------------------------------------------------
--- Theme                                                                
+---------------------------------------------------------------------------
+-- Theme                                                                   
 ---------------------------------------------------------------------------
 
 myFocusFollowsMouse  = True
@@ -436,8 +376,8 @@ myShowWNameTheme = def
     , swn_color             = "#FFFFFF"
     }
 
-------------------------------------------------------------------------
--- Layouts                                                              
+---------------------------------------------------------------------------
+-- Layouts                                                                 
 --
 -- WARNING: WORK IN PROGRESS AND A LITTLE MESSY
 ---------------------------------------------------------------------------
@@ -507,12 +447,12 @@ myLayoutHook = showWorkspaceName
     myBigGaps           = gaps [(U, gap*2),(D, gap*2),(L, gap*2),(R, gap*2)]
 
     --------------------------------------------------------------------------
-    -- Tabs Layout                                                          --
+    -- Tabs Layout                                                            
     --------------------------------------------------------------------------
 
     threeCol = named "Unflexed"
          $ smartBorders
-		 $ avoidStruts
+         $ avoidStruts
          $ addTopBar
          $ myGaps
          $ mySpacing
@@ -520,13 +460,13 @@ myLayoutHook = showWorkspaceName
 
     tabs = named "Tabs"
          $ smartBorders
-		 $ avoidStruts
+         $ avoidStruts
 --         $ addTopBar
          $ addTabs shrinkText myTabTheme
          $ Simplest
 
     -----------------------------------------------------------------------
-    -- Flexi SubLayouts                                                  --
+    -- Flexi SubLayouts                                                    
     -----------------------------------------------------------------------
 
     flex = trimNamed 5 "Flex"
@@ -534,7 +474,7 @@ myLayoutHook = showWorkspaceName
               -- don't forget: even though we are using X.A.Navigation2D
               -- we need windowNavigation for merging to sublayouts
 --              $ smartBorders
-			  $ windowNavigation
+              $ windowNavigation
               $ addTopBar
               $ addTabs shrinkText myTabTheme
               -- $ subLayout [] (Simplest ||| (mySpacing $ Accordion))
@@ -549,293 +489,9 @@ myLayoutHook = showWorkspaceName
                       $ (suffixed "Std 2/3" $ ResizableTall 1 (1/20) (2/3) [])
                     ||| (suffixed "Std 1/2" $ ResizableTall 1 (1/20) (1/2) [])
 
-                  --  ||| fullTabs
-                  --fullTabs = suffixed "Tabs Full" $ Simplest
-                  --
-                  -- NOTE: removed this from the two (wide/std) sublayout
-                  -- sequences. if inside the ifWider, the ||| combinator
-                  -- from X.L.LayoutCombinators can't jump to it directly (
-                  -- or I'm doing something wrong, either way, it's simpler
-                  -- to solve it by just using a tabbed layout in the main
-                  -- layoutHook). The disadvantage is that I lose the "per
-                  -- screen" memory of which layout was where if using the
-                  -- tabbed layout (if using the the ifWider construct as
-                  -- I am currently, it seems to work fine)
-                  --
-                  -- Using "Full" here (instead of Simplest) will retain the
-                  -- tabbed sublayout structure and allow paging through each
-                  -- group/window in full screen mode. However my preference
-                  -- is to just see all the windows as tabs immediately.  
-                  -- Using "Simplest" here will do this: display all windows
-                  -- as tabs across the top, no "paging" required. However
-                  -- this is misleading as the sublayouts are of course still
-                  -- there and you will have to use the nornmal W.focusUp/Down
-                  -- to successfully flip through them. Despite this
-                  -- limitation I prefer this to the results with "Full".
 
-{-|
-    -----------------------------------------------------------------------
-    -- Simple Flexi                                                      --
-    -----------------------------------------------------------------------
-    --
-    -- Simple dynamically resizing layout as with the other variations in
-    -- this config. This layout has not tabs in it and simply uses
-    -- Resizable Tall and Three Column layouts.
-    simpleFlexi = named "Simple Flexible"
-              $ ifWider smallMonResWidth simpleThree simpleTall
-    simpleTall = named "Tall"
-              $ addTopBar
-              $ avoidStruts
-              $ mySpacing
-              $ myGaps
-              $ ResizableTall 1 (1/300) (2/3) []
-              
-    simpleThree = named "Three Col"
-              $ avoidStruts
-              $ addTopBar
-              $ mySpacing
-              $ myGaps
-              $ ThreeColMid 1 (3/100) (1/2)
-
-
------------------------------------------------------------------------
-    -- Other Misc Layouts                                                --
-    -----------------------------------------------------------------------
-    --
-    --
-    masterTabbedP   = named "MASTER TABBED"
-              $ addTopBar
-              $ avoidStruts
-              $ mySpacing
-              $ myGaps
-              $ mastered (1/100) (1/2) $ tabbed shrinkText myTabTheme
-    bsp       = named "BSP"
-              $ borderResize (avoidStruts
-              $ addTopBar
-              $ mySpacing
-              $ myGaps
-              $ emptyBSP )
-              -- $ borderResize (emptyBSP)
-    oneBig    = named "1BG"
-              $ avoidStruts
-              $ addTopBar
-              $ mySpacing
-              $ myGaps
-              $ OneBig (3/4) (3/4)
-    tiledP    = named "TILED"
-              $ addTopBar
-              $ avoidStruts
-              $ mySpacing
-              $ myGaps
-              $ consoleOn
-              $ tiled'
-    oneUp =   named "1UP"
-              $ avoidStruts
-              $ myGaps
-              $ combineTwoP (ThreeCol 1 (3/100) (1/2))
-                            (Simplest)
-                            (Tall 1 0.03 0.5)
-                            (ClassName "Google-chrome-beta")
-    -----------------------------------------------------------------------
-    -- Master-Tabbed Dymamic                                             --
-    -----------------------------------------------------------------------
-    --
-    -- Dynamic 3 pane layout with one tabbed panel using X.L.Master
-    -- advantage is that it can do a nice 3-up on both ultrawide and
-    -- standard (laptop in my case) screen sizes, where the layouts
-    -- look like this:
-    --
-    -- Ultrawide:
-    -- --------------------------------------------
-    -- |          |                    |          |
-    -- |          |                    |          |
-    -- |          |                    |          |
-    -- |  Master  |       Master       |   Tabs   |
-    -- |          |                    |          |
-    -- |          |                    |          |
-    -- |          |                    |          |
-    -- --------------------------------------------
-    -- \____________________ _____________________/
-    --                      '
-    --                 all one layout
-    --
-    -- Standard:
-    -- ---------------------------------
-    -- |                    |          |
-    -- |                    |          |
-    -- |                    |          |
-    -- |       Master       |   Tabs   |
-    -- |                    |          |
-    -- |                    |          |
-    -- |                    |          |
-    -- ---------------------------------
-    -- \_______________ _______________/
-    --                 '
-    --            all one layout
-    --
-    -- Advantages to this use of X.L.Master to created this dynamic
-    -- layout include:
-    --
-    --   * No fussing with special keys to swap windows between the
-    --     Tabs and Master zones
-    --
-    --   * Window movement and resizing is very straightforward
-    --
-    --   * Limited need to maintain a mental-map of the layout
-    --     (pretty easy to understand... it's just a layout)
-    --
-    -- Disadvantages include:
-    --
-    --   * Swapping a window from tabbed area will of necessity swap
-    --     one of the Master windows back into tabs (since there can
-    --     only be two master windows)
-    --
-    --   * Master area can have only one/two windows in std/wide modes
-    --     respectively
-    --
-    --   * When switching from wide to standard, the leftmost pane
-    --     (which is visually secondary to the large central master
-    --     window) becomes the new dominant master window on the
-    --     standard display (this is easy enough to deal with but
-    --     is a non-intuitive effect)
-    masterTabbedDynamic = named "Master-Tabbed Dynamic"
-              $ ifWider smallMonResWidth masterTabbedWide masterTabbedStd
-    masterTabbedStd = named "Master-Tabbed Standard"
-              $ addTopBar
-              $ avoidStruts
-              $ gaps [(U, gap*2),(D, gap*2),(L, gap*2),(R, gap*2)]
-              $ mastered (1/100) (2/3)
-              $ gaps [(U, 0),(D, 0),(L, gap*2),(R, 0)]
-              $ tabbed shrinkText myTabTheme
-    masterTabbedWide = named "Master-Tabbed Wide"
-              $ addTopBar
-              $ avoidStruts
-              $ gaps [(U, gap*2),(D, gap*2),(L, gap*2),(R, gap*2)]
-              $ mastered (1/100) (1/4)
-              $ gaps [(U, 0),(D, 0),(L, gap*2),(R, 0)]
-              $ mastered (1/100) (2/3)
-              $ gaps [(U, 0),(D, 0),(L, gap*2),(R, 0)]
-              $ tabbed shrinkText myTabTheme
-    -----------------------------------------------------------------------
-    -- Tall-Tabbed Dymamic                                               --
-    -----------------------------------------------------------------------
-    --
-    -- Dynamic 3 pane layout with one tabbed panel using X.L.ComboP
-    -- advantage is that it can do a nice 3-up on both ultrawide and
-    -- standard (laptop in my case) screen sizes, where the layouts
-    -- look like this:
-    --
-    -- Ultrawide:
-    -- --------------------------------------------
-    -- |          |                    |          |
-    -- |          |                    |          |
-    -- |          |                    |          |
-    -- |----------|       Master       |   Tabs   |
-    -- |          |                    |          |
-    -- |          |                    |          |
-    -- |          |                    |          |
-    -- --------------------------------------------
-    -- \______________ _______________/\____ _____/
-    --                '                     '
-    --        this set of panes is      This is a
-    --        its' own layout in a      separate
-    --        Tall configuration        tab format
-    --                                  layout
-    --
-    -- Standard:
-    -- ---------------------------------
-    -- |                    |          |
-    -- |                    |          |
-    -- |                    |          |
-    -- |       Master       |   Tabs   |
-    -- |                    |          |
-    -- |--------------------|          |
-    -- |         |          |          |
-    -- ---------------------------------
-    -- \_________ _________/\____ _____/
-    --           '               '
-    -- this set of panes is  This is a
-    -- its' own layout in a  separate
-    -- Tall configuration    tab format
-    --                       layout
-    --
-    -- Advantages to this use of ComboP to created this dynamic
-    -- layout include:
-    --
-    --   * the center Master stays the same when the layout
-    --     changes (unlike the X.L.Master based dyn. layout)
-    --
-    --   * the Master can have a set of panes under it on the
-    --     small screen (standard) layout
-    --
-    --   * on ultrawide the leftmost pane may be divided into
-    --     multiple windows
-    --
-    --   * possible to toss a tabbed window to the "Master" area
-    --     without swapping a window back into tabs
-    --
-    --   * use of ComboP allows redirection windows to either
-    --     left or right section
-    --
-    -- Disadvantages include:
-    --
-    --   * normal window swaps fail between the two separate
-    --     layouts. There must be a special swap-between-layouts
-    --     binding (normal window NAVIGATION works, at least using
-    --     X.A.Navigation2D).
-    --
-    --   * switching between screens can leave title bar clutter
-    --     that hasn't been cleaned up properly (restarting
-    --     XMonad works to clean this up, but that's hacky)
-    --
-    --   * somewhat greater need to maintain a mental-map of the
-    --     layout (you need to have a sense for the windows being
-    --     in separate sections of the different layouts)
---    smartTallTabbed = named "Smart Tall-Tabbed"
---            $ avoidStruts
---            $ ifWider smallMonResWidth wideScreen normalScreen
---            where
---            wideScreen   = combineTwoP (TwoPane 0.03 (3/4))
---                           (smartTall)
---                           (smartTabbed)
---                           (ClassName "Google-chrome-beta")
---            normalScreen = combineTwoP (TwoPane 0.03 (2/3))
---                           (smartTall)
---                           (smartTabbed)
---                           (ClassName "Google-chrome-beta")
---    smartTall = named "Smart Tall"
---            $ addTopBar
---        $ mySpacing
---            $ myGaps
---        $ boringAuto
---            $ ifWider smallMonResWidth wideScreen normalScreen
---            where
---                wideScreen = reflectHoriz $ Tall 1 0.03 (2/3)
---                normalScreen = Mirror $ Tall 1 0.03 (4/5)
---    smartTabbed = named "Smart Tabbed"
---              $ addTopBar
---              $ myCustomGaps
---              $ tabbed shrinkText myTabTheme
-	-}
-    -----------------------------------------------------------------------
-    -- Flexi Combinators                                                 --
-    -----------------------------------------------------------------------
-    --
-    -- failed attempt. creates a nice looking layout but I'm not sure
-    -- how to actually direct tabs to the tabbed area
-    --
-    --     flexiCombinators = named "Flexi Combinators"
-    --             $ avoidStruts
-    --             $ ifWider smallMonResWidth wideScreen normalScreen
-    --             where
-    --             wideScreen   = smartTall ****||* smartTabbed
-    --             normalScreen = smartTall ***||** smartTabbed
-
-
-
-
-------------------------------------------------------------------------
--- Bindings                                                             
+---------------------------------------------------------------------------
+-- Bindings                                                                
 ---------------------------------------------------------------------------
 
 myModMask = mod4Mask -- super (and on my system, hyper) keys
@@ -849,20 +505,6 @@ showKeybindings x = addName "Show Keybindings" $ io $ do
     hPutStr h (unlines $ showKm x)
     hClose h
     return ()
-
--- some of the structure of the following cribbed from 
--- https://github.com/SimSaladin/configs/blob/master/.xmonad/xmonad.hs
--- https://github.com/paul-axe/dotfiles/blob/master/.xmonad/xmonad.hs
--- https://github.com/pjones/xmonadrc (+ all the dyn project stuff)
-
--- wsKeys = map (\x -> "; " ++ [x]) ['1'..'9']
--- this along with workspace section below results in something link
--- M1-semicolon         1 View      ws
--- M1-semicolon         2 View      ws
--- M1-Shift-semicolon   1 Move w to ws
--- M1-Shift-semicolon   2 Move w to ws
--- M1-C-Shift-semicolon 1 Copy w to ws
--- M1-C-Shift-semicolon 2 Copy w to ws
 
 wsKeys = map show $ [1..9] ++ [0]
 
@@ -924,7 +566,7 @@ myKeys conf = let
     in
 
     -----------------------------------------------------------------------
-    -- System / Utilities
+    -- System / Utilities                                                  
     -----------------------------------------------------------------------
     subKeys "System"
     [ ("M-q"                    , addName "Restart XMonad"                  $ spawn "xmonad --restart")
@@ -932,7 +574,7 @@ myKeys conf = let
     , ("M-S-q"                  , addName "Quit XMonad"                     $ confirmPrompt hotPromptTheme "Quit XMonad" $ io (exitWith ExitSuccess))
 --    , ("M-x"                    , addName "Lock screen"                     $ spawn "xset s activate")
 --    , ("M-<F4>"                    , addName "Print Screen"                    $ return ())
-  --, ("M-F1"                   , addName "Show Keybindings"                $ return ())
+--    , ("M-F1"                   , addName "Show Keybindings"                $ return ())
     ] ^++^
 
     -----------------------------------------------------------------------
@@ -941,7 +583,7 @@ myKeys conf = let
 
     subKeys "Actions"
     [ ("M-<KP_Insert>"             , addName "Power off"                       $ spawn "shutdown -h now")
-    , ("M-<KP_0>"                  , addName "Power reset"                     $ spawn "shutdown -r now")
+    , ("M-<KP_Delete>"             , addName "Power reset"                     $ spawn "shutdown -r now")
     , ("<XF86PowerOff>"            , addName "Power off"                       $ spawn "shutdown -h now")
 
     , ("M-<F5>"                    , addName "Up brilho"                       $ spawn "xbacklight -inc 6")
@@ -972,19 +614,10 @@ myKeys conf = let
     , ("M-C-<KP_Down>"             , addName "Redim BAIXO desce"               $ withFocused (keysResizeWindow (0,5) (0,0)))
 
 
---    , ("M-7"                    , addName "TESTING"                         $ runInTerm "-name glances" "glances" )
-{-
-    , ("M-u"                    , addName "Copy current browser URL"        $ spawn "with-url copy")
-    , ("M-o"                    , addName "Display (output) launcher"       $ spawn "displayctl menu")
-    , ("M-<XF86Display>"        , addName "Display - force internal"        $ spawn "displayctl internal")
-    , ("S-<XF86Display>"        , addName "Display - force internal"        $ spawn "displayctl internal")
-    , ("M-i"                    , addName "Network (Interface) launcher"    $ spawn "nmcli_dmenu")
-    , ("M-/"                    , addName "On-screen keys"                  $ spawn "killall screenkey &>/dev/null || screenkey --no-systray")
--}
-	] ^++^
+    ] ^++^
 
     -----------------------------------------------------------------------
-    -- Launchers
+    -- Launchers                                                           
     -----------------------------------------------------------------------
     subKeys "Launchers"
     [ ("M-p"                    , addName "Launcher"                        $ spawn myLauncher)
@@ -998,44 +631,25 @@ myKeys conf = let
     , ("M-<Home>"               , addName "E-mail"                          $ spawn myMail)
     , ("M-<Insert>"             , addName "Keep"                            $ spawn myKeep)
     , ("M-<End>"                , addName "Translate"                       $ spawn myTranslate)
+    , ("M-<Delete>"             , addName "IDE"                             $ spawn myIDE)
 
-
---    , ("M-c"                    , addName "NSP Chat"                        $ bindOn WS [(wsWRK, namedScratchpadAction scratchpads "hangoutsWork"),
---                                                                              ("", namedScratchpadAction scratchpads "hangoutsPersonal")])
- --   , ("M-t"                    , addName "NSP Tasks"                       $ bindOn WS [(wsWRK, namedScratchpadAction scratchpads "trelloWork"),
---                                                                              ("", namedScratchpadAction scratchpads "trello")])
---    , ("M-m"                    , addName "NSP Music"                       $ namedScratchpadAction scratchpads "googleMusic")
---    , ("M-v"                    , addName "NSP Video"                       $ namedScratchpadAction scratchpads "plex")
---    , ("M1-x"                   , addName "NSP Xawtv"                       $ namedScratchpadAction scratchpads "xawtv")
---    , ("M-n"                    , addName "NSP Console"                     $ namedScratchpadAction scratchpads "console")
---    , ("M-s s"                  , addName "Cancel submap"                   $ return ())
---    , ("M-s M-s"                , addName "Cancel submap"                   $ return ())
     ] ^++^
 
     -----------------------------------------------------------------------
-    -- Windows
+    -- Windows                                                             
     -----------------------------------------------------------------------
 
     subKeys "Windows"
     (
     [ ("M-c"                    , addName "Kill"                            kill1)
     , ("M-S-c"                  , addName "Kill all"                        $ confirmPrompt hotPromptTheme "kill all" $ killAll)
-    --, ("M-d"                    , addName "Duplicate w to all ws"           $ windows copyToAll)
---    , ("M-S-d"                  , addName "Kill other duplicates"           $ killAllOtherCopies)
     , ("M-d"                    , addName "Duplicate w to all ws"           $ toggleCopyToAll)
---    , ("M-p"                    , addName "Hide window to stack"            $ withFocused hideWindow)
---    , ("M-S-p"                  , addName "Restore hidden window (FIFO)"    $ popOldestHiddenWindow)
-
     , ("M-b"                    , addName "Promote"                         $ promote) 
-
     , ("M-g"                    , addName "Un-merge from sublayout"         $ withFocused (sendMessage . UnMerge))
     , ("M-S-g"                  , addName "Merge all into sublayout"        $ withFocused (sendMessage . MergeAll))
 
---    , ("M-z u"                  , addName "Focus urgent"                    focusUrgent)
     , ("M-z m"                  , addName "Focus master"                    $ windows W.focusMaster)
 
-    --, ("M-<Tab>"              	, addName "Focus down"                      $ windows W.focusDown)
-    --, ("M-S-<Tab>"              , addName "Focus up"                        $ windows W.focusUp)
 
     , ("M-'"                    , addName "Navigate tabs D"                 $ bindOn LD [("Tabs", windows W.focusDown), ("", onGroup W.focusDown')])
     , ("M-;"                    , addName "Navigate tabs U"                 $ bindOn LD [("Tabs", windows W.focusUp), ("", onGroup W.focusUp')])
@@ -1049,10 +663,9 @@ myKeys conf = let
     ++ zipM' "M-"               "Navigate window"                           dirKeys dirs windowGo True
     -- ++ zipM' "M-S-"               "Move window"                               dirKeys dirs windowSwap True
     -- TODO: following may necessitate use of a "passthrough" binding that can send C- values to focused w
-    ++ zipM' "C-"             "Move window"                               dirKeys dirs windowSwap True
+    ++ zipM' "C-"               "Move window"                               dirKeys dirs windowSwap True
     ++ zipM  "M-C-"             "Merge w/sublayout"                         dirKeys dirs (sendMessage . pullGroup)
     ++ zipM' "M-"               "Navigate screen"                           arrowKeys dirs screenGo True
-    -- ++ zipM' "M-S-"             "Move window to screen"                     arrowKeys dirs windowToScreen True
     ++ zipM' "M-C-"             "Move window to screen"                     arrowKeys dirs windowToScreen True
     ++ zipM' "M-S-"             "Swap workspace to screen"                  arrowKeys dirs screenSwap True
 
@@ -1077,10 +690,7 @@ myKeys conf = let
     , ("M-a"                    , addName "Toggle last workspace"       $ toggleWS' ["NSP"])
     ]
     ++ zipM "M-"                "View      ws"                          wsKeys [0..] (withNthWorkspace W.greedyView)
-    -- ++ zipM "M-S-"              "Move w to ws"                          wsKeys [0..] (withNthWorkspace W.shift)
-    -- TODO: following may necessitate use of a "passthrough" binding that can send C- values to focused w
     ++ zipM "C-"                "Move w to ws"                          wsKeys [0..] (withNthWorkspace W.shift)
-    -- TODO: make following a submap
     ++ zipM "M-S-C-"            "Copy w to ws"                          wsKeys [0..] (withNthWorkspace copy)
     ) ^++^
 
@@ -1123,26 +733,6 @@ myKeys conf = let
     , ("C-S-l"                  , addName "Ctrl-l passthrough"          $ P.sendKey controlMask xK_l)
     ] ^++^
 
-    -----------------------------------------------------------------------
-    -- Reference
-    -----------------------------------------------------------------------
-    -- recent windows not working
-    -- , ("M4-<Tab>",              , addName "Cycle recent windows"        $ (cycleRecentWindows [xK_Super_L] xK_Tab xK_Tab))
-    -- either not using these much or (in case of two tab items below), they conflict with other bindings
-    -- so I'm just turning off this whole section for now. retaining for refernce after a couple months
-    -- of working with my bindings to see if I want them back. TODO REVIEW
-    --, ("M-s m"                  , addName "Swap master"                 $ windows W.shiftMaster)
-    --, ("M-s p"                  , addName "Swap next"                   $ windows W.swapUp)
-    --, ("M-s n"                  , addName "Swap prev"                   $ windows W.swapDown)
-    --, ("M-<Tab>"                , addName "Cycle up"                    $ windows W.swapUp)
-    --, ("M-S-<Tab>"              , addName "Cycle down"                  $ windows W.swapDown)
-
-    -- sublayout specific (unused)
-    -- , ("M4-C-S-m"               , addName "onGroup focusMaster"         $ onGroup focusMaster')
-    -- , ("M4-C-S-]"               , addName "toSubl IncMasterN 1"         $ toSubl $ IncMasterN 1)
-    -- , ("M4-C-S-["               , addName "toSubl IncMasterN -1"        $ toSubl $ IncMasterN (-1))
-    -- , ("M4-C-S-<Return>"        , addName "onGroup swapMaster"          $ onGroup swapMaster')
-
 
     -----------------------------------------------------------------------
     -- Resizing
@@ -1151,33 +741,6 @@ myKeys conf = let
     subKeys "Resize"
 
     [
-
-    -- following is a hacky hack hack
-    --
-    -- I want to be able to use the same resize bindings on both BinarySpacePartition and other
-    -- less sophisticated layouts. BSP handles resizing in four directions (amazing!) but other
-    -- layouts have less refined tastes and we're lucky if they just resize the master on a single
-    -- axis.
-    --
-    -- To this end, I am using X.A.MessageFeedback to test for success on using the BSP resizing
-    -- and, if it fails, defaulting to the standard (or the X.L.ResizableTile Mirror variants)
-    -- Expand and Shrink commands.
-    --
-    -- The "sequence_" wrapper is needed because for some reason the windows weren't resizing till
-    -- I moved to a different window or refreshed, so I added that here. Shrug.
-
-    -- mnemonic: less than / greater than
-    --, ("M4-<L>"       , addName "Expand (L on BSP)"     $ sequence_ [(tryMessage_ (ExpandTowards L) (Expand)), refresh])
-
---      ("C-<L>"                  , addName "Expand (L on BSP)"           $ tryMsgR (ExpandTowards L) (Shrink))
---    , ("C-<R>"                  , addName "Expand (R on BSP)"           $ tryMsgR (ExpandTowards R) (Expand))
---    , ("C-<U>"                  , addName "Expand (U on BSP)"           $ tryMsgR (ExpandTowards U) (MirrorShrink))
---    , ("C-<D>"                  , addName "Expand (D on BSP)"           $ tryMsgR (ExpandTowards D) (MirrorExpand))
---
---    , ("C-S-<L>"                , addName "Shrink (L on BSP)"           $ tryMsgR (ShrinkFrom R) (Shrink))
---    , ("C-S-<R>"                , addName "Shrink (R on BSP)"           $ tryMsgR (ShrinkFrom L) (Expand))
---    , ("C-S-<U>"                , addName "Shrink (U on BSP)"           $ tryMsgR (ShrinkFrom D) (MirrorShrink))
---    , ("C-S-<D>"                , addName "Shrink (D on BSP)"           $ tryMsgR (ShrinkFrom U) (MirrorExpand))
 
       ("M-["                    , addName "Expand (L on BSP)"           $ tryMsgR (ExpandTowards L) (Shrink))
     , ("M-]"                    , addName "Expand (R on BSP)"           $ tryMsgR (ExpandTowards R) (Expand))
@@ -1188,44 +751,15 @@ myKeys conf = let
     , ("M-C-]"                  , addName "Shrink (R on BSP)"           $ tryMsgR (ShrinkFrom L) (Expand))
     , ("M-C-S-["                , addName "Shrink (U on BSP)"           $ tryMsgR (ShrinkFrom D) (MirrorShrink))
     , ("M-C-S-]"                , addName "Shrink (D on BSP)"           $ tryMsgR (ShrinkFrom U) (MirrorExpand))
-
-  --, ("M-r"                    , addName "Mirror (BSP rotate)"         $ tryMsgR (Rotate) (XMonad.Layout.MultiToggle.Toggle MIRROR))
-  --, ("M-S-C-m"                , addName "Mirror (always)"             $ sendMessage $ XMonad.Layout.MultiToggle.Toggle MIRROR)
-  --, ("M4-r"                   , addName "BSP Rotate"                  $ sendMessage Rotate)
-
--- TODO: the following are potentially useful but I won't know till I work with BSP further
---    , ("M4-s"                   , addName "BSP Swap"                    $ sendMessage XMonad.Layout.BinarySpacePartition.Swap)
---    , ("M4-p"                   , addName "BSP Focus Parent"            $ sendMessage FocusParent)
---    , ("M4-n"                   , addName "BSP Select Node"             $ sendMessage SelectNode)
-    --, ("M4-m"                   , addName "BSP Move Node"               $ sendMessage MoveNode)
-
-    -- sublayout specific (unused)
-    --  ("M4-C-S-."               , addName "toSubl Shrink"               $ toSubl Shrink)
-    --, ("M4-C-S-,"               , addName "toSubl Expand"               $ toSubl Expand)
     ]
-		where
-			toggleCopyToAll = wsContainingCopies >>= \ws -> case ws of
-							[] -> windows copyToAll
-							_ -> killAllOtherCopies
+        where
+          toggleCopyToAll = wsContainingCopies >>= \ws -> case ws of
+                           [] -> windows copyToAll
+                           _ -> killAllOtherCopies
 
     -----------------------------------------------------------------------
-    -- Screens
+    -- Screens                                                             
     -----------------------------------------------------------------------
---    subKeys "Screens"
---    ([("M-C-<Right>", addName "Focus prev screen" prevScreen)
---    , ("M-C-<Left>" , addName "Focus next screen" nextScreen)
---    ]
---    ++ zipMod "Focus screen"                         screenKeys [0..] "M-"    (screenAction W.view)
---    ++ zipMod "Move client to screen"                screenKeys [0..] "M-S-"  (screenAction W.shift)
---    ++ zipMod "Swap workspace with screen"           screenKeys [0..] "M-M1-" (screenAction W.greedyView)
---    ++ zipMod "Swap workspace with and focus screen" screenKeys [0..] "M-C-"  (\s -> screenAction W.greedyView s >> screenAction W.view s)
---    ) ^++^
-
---    subKeys "Media Controls"
---    [
---    ("<XF86AudioMicMute>"      , addName "Mic Mute"                    $ spawn "notify-send mic mute")
---    ]
-    
 
 -- Mouse bindings: default actions bound to mouse events
 -- Includes window snapping on move/resize using X.A.FloatSnap
@@ -1252,16 +786,11 @@ myMouseBindings (XConfig {XMonad.modMask = myModMask}) = M.fromList $
       >> ifClick (snapMagicResize [R,D] (Just 50) (Just 50) w)
       >> windows W.shiftMaster ))
 
---    , ((mySecondaryModMask,      button4), (\w -> focus w
---      >> prevNonEmptyWS))
---
---    , ((mySecondaryModMask,      button5), (\w -> focus w
---      >> nextNonEmptyWS))
 
     ]
 
-------------------------------------------------------------------------
--- Startup                                                              
+---------------------------------------------------------------------------
+-- Startup                                                                 
 ---------------------------------------------------------------------------
 
 quitXmonad :: X ()
@@ -1277,8 +806,8 @@ restartXmonad = do
 
 
 
-------------------------------------------------------------------------
--- Log                                                                  
+---------------------------------------------------------------------------
+-- Log                                                                     
 ---------------------------------------------------------------------------
 
 myLogHook h = do
@@ -1317,13 +846,13 @@ myFadeHook = composeAll
     , (className =? "Terminator") <&&> (isUnfocused) --> opacity 0.9
     , (className =? "URxvt") <&&> (isUnfocused) --> opacity 0.9
     , fmap ("Google" `isPrefixOf`) className --> opaque
-    , isDialog --> opaque 
+    , isDialog --> opaque
     --, isUnfocused --> opacity 0.55
     --, isFloating  --> opacity 0.75
     ]
 
-------------------------------------------------------------------------
--- Actions                                                              
+---------------------------------------------------------------------------
+-- Actions                                                                 
 ---------------------------------------------------------------------------
 
 
@@ -1343,7 +872,7 @@ instance UrgencyHook LibNotifyUrgencyHook where
 
 
 ---------------------------------------------------------------------------
--- New Window Actions
+-- New Window Actions                                                      
 ---------------------------------------------------------------------------
 
 -- https://wiki.haskell.org/Xmonad/General_xmonad.hs_config_tips#ManageHook_examples
@@ -1362,13 +891,8 @@ myManageHook =
             [ resource =? "desktop_window" -?> doIgnore
             , resource =? "stalonetray"    -?> doIgnore
             , resource =? "vlc"     -?> doFloat
-            , resource =? "mplayer" -?> doCenterFloat
+--            , resource =? "mplayer" -?> doCenterFloat
             , resource =? "steam"   -?> doFloat
---            , resource =? trelloResource -?> doFullFloat
---            , resource =? trelloWorkResource -?> doFullFloat
---            , resource =? googleMusicResource -?> doFullFloat
---            , resource =? plexResource -?> doCenterFloat
---            , resource =? hangoutsResource -?> insertPosition End Newer
             , transience
             , isBrowserDialog -?> forceCenterFloat
             --, isConsole -?> forceCenterFloat
@@ -1388,30 +912,13 @@ myManageHook =
         tileBelowNoFocus = insertPosition Below Older
 
 ---------------------------------------------------------------------------
--- X Event Actions
+-- X Event Actions                                                         
 ---------------------------------------------------------------------------
 
 myHandleEventHook = docksEventHook
                 <+> fadeWindowsEventHook
---                <+> dynamicTitle myDynHook
                 <+> handleEventHook def
                 <+> XMonad.Hooks.EwmhDesktops.fullscreenEventHook
---    where
---        myDynHook = composeAll
---            [ isPersonalHangouts --> forceCenterFloat
---            , isWorkHangouts --> insertPosition End Newer
---            ]
-
----------------------------------------------------------------------------
--- Custom hook helpers
----------------------------------------------------------------------------
-
--- from:
--- https://github.com/pjones/xmonadrc/blob/master/src/XMonad/Local/Action.hs
---
--- Useful when a floating window requests stupid dimensions.  There
--- was a bug in Handbrake that would pop up the file dialog with
--- almost no height due to one of my rotated monitors.
 
 forceCenterFloat :: ManageHook
 forceCenterFloat = doFloatDep move
@@ -1426,21 +933,11 @@ forceCenterFloat = doFloatDep move
     y = (1-h)/2
 
 myStartupHook = do
-
-    -- init-tilingwm sets up all major "desktop environment" like components
-    -- spawnOnce "$HOME/bin/wm/init-tilingwm"
-    -- spawn "/home/ethan/bin/wm/init-tilingwm"
-    -- spawn "/home/ethan/bin/wm/init-wallpaper"
-
-    -- init-tray kills and restarts stalone tray, hence just "spawn" so it
-    -- runs on restart and will suffice to reposition tray on display changes
-    -- TODO: evaluate moving to a "restart tray only" option on display change
-    -- spawn     "$HOME/bin/wm/init-tray"
-
 spawn "numlockx"
 spawn "[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources"
 spawn "xbacklight -set 40"
 spawn "stalonetray"
 spawn "feh --bg-scale ~/Imagens/adwaita-night.jpg"
 spawn "xsetroot -cursor_name left_ptr"
+spawn "Xcursor.theme: Adwaita"
 spawn "xcompmgr"
