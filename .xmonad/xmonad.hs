@@ -932,6 +932,7 @@ forceCenterFloat = doFloatDep move
     x = (1-w)/2
     y = (1-h)/2
 
+-- remova o que estiver aqui do arquivo .xinitrc
 myStartupHook = do
 spawn "numlockx"
 spawn "[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources"
